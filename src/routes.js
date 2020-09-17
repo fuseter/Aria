@@ -7,7 +7,6 @@ import HomePage from '../src/views/HomePage/HomePage'
 
 
 //TopNav
-
 import LoginPage from '../src/layouts/LoginPage'
 import LoginLayout from '../src/components/LoginLayout'
 import RegisterPage from '../src/layouts/RegisterPage'
@@ -32,11 +31,14 @@ const routes = [
   },
 
 
+
+
   {
     path: '/auth',
+    element: <LoginLayout />,
     children: [
       {path: '/', element: <LoginPage/> },
-      {path: '/register', element: <RegisterPage/> },
+      // {path: '/register', element: <RegisterPage/> },
     ]
   },
 
@@ -44,13 +46,13 @@ const routes = [
 
 
 
-  // {
-  //   path: '404',
-  //   children: [
-  //     { path: '/', element: <NotFoundView/>},
-  //     { path: '*', element: <Navigate to="/404" /> },
-  //   ]
-  // },
+  {
+    path: '404',
+    children: [
+      { path: '/', element: <NotFoundView/>},
+      { path: '*', element: <Navigate to="/404" /> },
+    ]
+  },
 
 
 ];

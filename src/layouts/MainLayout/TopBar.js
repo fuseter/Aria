@@ -12,10 +12,10 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
-import Logo from "../../../src/components/Logo";
+// import Logo from "../../../src/components/Logo";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import Logo from "../../images/logo.png";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -40,7 +40,14 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
     >
       <Toolbar>
         <Link to="/">
-          <Logo />
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+          >
+            <img src={Logo} width="130" />
+          </IconButton>
         </Link>
         <Box flexGrow={1} />
         <Hidden mdDown>
@@ -51,7 +58,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
                 color="primary"
                 variant="dot"
               >
-                <LockOpenIcon  color="primary"/>
+                <LockOpenIcon color="primary" />
               </Badge>
             </IconButton>
           </Link>

@@ -10,7 +10,7 @@ const Homepage = () => {
   const classes = useStyles();
 
   return (
-    <Page className={classes.root} title="Products">
+    <Page className={classes.root} title="Aria">
       <Container maxWidth={false}>
         <Typography variant="h1" style={{color: '#ffffff'}}>HomePage เด้อ</Typography>
       </Container>

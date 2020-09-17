@@ -6,7 +6,7 @@ import typography from './typography';
 const backgroundColor = '#222222'
 const NavbarColor = '#101010'
 const textColor = '#ffffff'
-const primary = "#EE5253"
+const primary = "#FF0A6C"
 
 const theme = createMuiTheme({
 
