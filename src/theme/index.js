@@ -2,22 +2,30 @@ import { createMuiTheme, colors } from '@material-ui/core';
 import shadows from './shadows';
 import typography from './typography';
 
+
+const backgroundColor = '#222222'
+const NavbarColor = '#101010'
+const textColor = '#ffffff'
+const primary = "#EE5253"
+
 const theme = createMuiTheme({
+
+  
   palette: {
     background: {
-      dark: '#F4F6F8',
+      dark: backgroundColor,
       default: colors.common.white,
-      paper: colors.common.white
+      paper: NavbarColor
     },
     primary: {
-      main: colors.indigo[500]
+      main:  primary
     },
     secondary: {
-      main: colors.indigo[500]
+      main: "#000000"
     },
     text: {
-      primary: colors.blueGrey[900],
-      secondary: colors.blueGrey[600]
+      primary: textColor,
+      secondary: textColor
     }
   },
   shadows,
