@@ -1,12 +1,11 @@
 import React from 'react';
 import  { Outlet }  from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
-import Nav from './Topbar'
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
 
-    height: '100%',
+    // height: '100%',
 
 
   },
@@ -18,7 +17,7 @@ const MainLayout = () => {
 
   return (
     <div className={classes.root}>
-      <Nav />
+      {/* <Nav /> */}
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>

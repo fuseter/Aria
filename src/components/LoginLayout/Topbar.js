@@ -1,37 +1,51 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  navbarcolor: {
-    backgroundColor: "#101010",
-  },
-}));
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
 
-export default function ButtonAppBar() {
-  const classes = useStyles();
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
 
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default function ElevateAppBar(props) {
   return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.navbarcolor}>
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </div>
+    <React.Fragment>
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar style={{backgroundColor:'#222222'}}>
+          <Toolbar>
+            <Typography variant="h6">Scroll to Elevate App Bar</Typography>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+      <Toolbar />
+      <Container>
+      </Container>
+    </React.Fragment>
   );
 }

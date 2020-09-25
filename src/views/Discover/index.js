@@ -10,9 +10,9 @@ const Playlist = () => {
   const classes = useStyles();
 
   return (
-    <Page className={classes.root} title="Products">
+    <Page className={classes.root} title="Discover">
       <Container maxWidth={false}>
-        <Typography variant="h1" style={{color: '#ffffff'}}>Discover เด้อ</Typography>
+        <Typography variant="h1" style={{color: '#ffffff'}}>Discover</Typography>
       </Container>
     </Page>
   );

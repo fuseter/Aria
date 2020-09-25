@@ -26,7 +26,7 @@ const theme = createMuiTheme({
     text: {
       primary: textColor,
       secondary: textColor
-    }
+    },
   },
   shadows,
   typography

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import DashboardLayout from '../src/layouts/MainLayout';
 import NotFoundView from '../src/views/errors/NotFoundView';
 import HomePage from '../src/views/HomePage/HomePage'
 
 
+
+
+import MainLayout from '../src/layouts/MainLayout'
 
 //TopNav
 import LoginPage from '../src/layouts/LoginPage'
@@ -21,7 +23,7 @@ const routes = [
 
   {
     path: '/',
-    element: <DashboardLayout />,
+    element: <MainLayout />,
     children: [
       { path: '/', element: <HomePage /> },
       { path: 'playlist', element: <Playlist /> },
@@ -29,23 +31,15 @@ const routes = [
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
-
-
-
-
   {
     path: '/auth',
     element: <LoginLayout />,
     children: [
       {path: '/', element: <LoginPage/> },
-      // {path: '/register', element: <RegisterPage/> },
+      {path: '/register', element: <RegisterPage/> },
     ]
   },
-
-
-
-
-
+  
   {
     path: '404',
     children: [
