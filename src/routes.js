@@ -6,7 +6,10 @@ import HomePage from '../src/views/HomePage/HomePage'
 
 
 
-import MainLayout from '../src/layouts/MainLayout'
+// import MainLayout from '../src/layouts/MainLayout'
+
+
+import MainLayout from '../src/layouts/HomePageLayout'
 
 //TopNav
 import LoginPage from '../src/layouts/LoginPage'

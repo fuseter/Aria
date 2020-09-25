@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import backgroundimage from "../../../../src/images/background.svg";
-import { Grid, Button, Typography } from "@material-ui/core";
+// import backgroundimage from "../../../../src/images/background.svg";
+import { Grid, Button, Typography,Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
-import jwt_decode from "jwt-decode";
-import { Navigate } from "react-router-dom";
-import bglanding from "../../../../src/images/bglanding.svg";
-import Container from "@material-ui/core/Container";
-import warehouse from "../../../../src/images/warehouse.svg";
-import AOS from "aos";
-import "aos/dist/aos.css";
+
+// import bglanding from "../../../../src/images/bglanding.svg";
+// import Container from "@material-ui/core/Container";
+// import warehouse from "../../../../src/images/warehouse.svg";
+
+import bglanding from '../../../../../src/images/Landing.png'
+
+
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -39,7 +40,6 @@ const useStyles = makeStyles(theme => ({
     },
     div: {
         style: {
-            background: `url(${backgroundimage})`,
             minHeight: "100vh",
             backgroundSize: "cover"
         }
@@ -64,20 +64,6 @@ export default function LandingLayout() {
     const [n, setN] = useState(0);
     const token = localStorage.usertoken;
 
-    useEffect(() => {
-        AOS.init({
-            duration: 3000,
-            easing: "ease"
-        });
-    }, []);
-
-    if (token !== undefined && n == 0) {
-        console.log(token);
-        setDecoded(jwt_decode(token));
-        setN(1);
-    }
-
-    if (token === undefined) {
         return (
             <div
                 className={classes.div}
@@ -99,7 +85,7 @@ export default function LandingLayout() {
                             md={6}
                             className={classes.cardWrapper}
                         >
-                            <div className={classes.card}>
+                            {/* <div className={classes.card}>
                                 <div data-aos="fade-down">
                                     <form>
                                         <Typography
@@ -137,7 +123,7 @@ export default function LandingLayout() {
                                         </Link>
                                     </form>
                                 </div>
-                            </div>
+                            </div> */}
                         </Grid>
                         <Grid
                             item
@@ -150,19 +136,16 @@ export default function LandingLayout() {
                                 data-aos="fade-up"
                                 data-aos-anchor-placement="center-bottom"
                             >
-                                <img
+                                {/* <img
                                     src={warehouse}
                                     className={classes.warehouse}
-                                />
+                                /> */}
                             </div>
+     
                         </Grid>
+                      
                     </Grid>
                 </Container>
             </div>
-        );
-    } else if (decoded.role == "Member") {
-        return <Navigate to="/app" />;
-    } else if (decoded.role == "Admin") {
-        return <Navigate to="/admin" />;
-    }
+        )
 }

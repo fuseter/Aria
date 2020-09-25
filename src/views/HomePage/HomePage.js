@@ -3,14 +3,14 @@ import { Container, makeStyles, Typography, Grid } from "@material-ui/core";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
 import Carousel from "./components/carousel";
+import LandingPage from "./components/Landing";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-  margin:{
-    marginTop: theme.spacing(3)
-  }
+  margin: {
+    marginTop: theme.spacing(3),
+  },
 }));
-
 
 const Homepage = () => {
   const classes = useStyles();
@@ -33,20 +33,11 @@ const Homepage = () => {
     if (user !== null) {
       setEmail(user.email);
     }
-  }, [user])
+  }, [user]);
 
   return (
     <Page className={classes.root} title="Aria">
-      <Container maxWidth={false}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} className={classes.margin}>
-            <Carousel />
-          </Grid>
-        </Grid>
-        <Grid>
-          
-        </Grid>
-      </Container>
+      <LandingPage />
     </Page>
   );
 };
