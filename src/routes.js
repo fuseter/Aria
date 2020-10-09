@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import NotFoundView from '../src/views/errors/NotFoundView';
 import HomePage from '../src/views/HomePage/HomePage'
+import Profile from '../src/views/Profile'
 
 
 
@@ -31,6 +32,7 @@ const routes = [
       { path: '/', element: <HomePage /> },
       { path: 'playlist', element: <Playlist /> },
       { path: 'Discover', element: <Discover /> },
+      { path: 'profile', element: <Profile /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

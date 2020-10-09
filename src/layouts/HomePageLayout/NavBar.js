@@ -181,6 +181,7 @@ export default function PrimarySearchAppBar(props) {
         <ElevationScroll {...props}>
           <AppBar className={classes.appbarcolor}>
             <Toolbar>
+              <Link to="/">
               <IconButton
                 edge="start"
                 className={classes.menuButton}
@@ -189,6 +190,7 @@ export default function PrimarySearchAppBar(props) {
               >
                 <img alt="Logo" src={Logo} className={classes.logo} />
               </IconButton>
+              </Link>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -207,6 +209,7 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.sectionDesktop}>
                 <Grid container spacing={3}>
                   <Grid item>
+
                     <Link to="/auth" style={{ color: "#000000" }}>
                       <Button
                         variant="contained"
@@ -231,6 +234,13 @@ export default function PrimarySearchAppBar(props) {
                     <Link to="/auth/register" style={{ color: "#000000" }}>
                       <Button color="primary">
                         <Typography variant="h5">ลงทะเบียน</Typography>
+                      </Button>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link to="profile" style={{ color: "#000000" }}>
+                      <Button color="primary">
+                        <Typography variant="h5">โปรไฟล์</Typography>
                       </Button>
                     </Link>
                   </Grid>
