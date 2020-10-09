@@ -2,13 +2,13 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import NotFoundView from '../src/views/errors/NotFoundView';
 import HomePage from '../src/views/HomePage/HomePage'
+import Upload from '../src/views/Upload'
+// import Testupload from '../src/views/Upload/upload'
 
 
 
 
 // import MainLayout from '../src/layouts/MainLayout'
-
-
 import MainLayout from '../src/layouts/HomePageLayout'
 
 //TopNav
@@ -31,6 +31,7 @@ const routes = [
       { path: '/', element: <HomePage /> },
       { path: 'playlist', element: <Playlist /> },
       { path: 'Discover', element: <Discover /> },
+      {path: 'upload' ,element: <Upload/> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
