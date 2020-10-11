@@ -72,7 +72,7 @@ export default function SignIn() {
     <Fragment>
       <div
         style={{
-          // รูปพื้นหลัง
+          // รูปพื้นหลังfafhadbadadad
           background: `url(${img})`,
           backgroundSize: "Cover",
           backgroundRepeat: "no-repeat",
