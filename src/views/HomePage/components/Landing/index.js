@@ -9,7 +9,7 @@ import KeyboardArrowRightIcon from "@material-ui/icons/KeyboardArrowRight";
 // import Container from "@material-ui/core/Container";
 // import warehouse from "../../../../src/images/warehouse.svg";
 
-import bglanding from '../../../../../src/images/Landing.png'
+import bglanding from '../../../../../src/images/Artboard.png'
 
 
 

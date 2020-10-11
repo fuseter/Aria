@@ -20,6 +20,7 @@ import RegisterPage from '../src/layouts/RegisterPage'
 //Nav
 import Playlist from '../src/views/Playlist'
 import Discover from '../src/views/Discover'
+import Profile from '../src/views/Profile'
 
 
 const routes = [
@@ -32,6 +33,7 @@ const routes = [
       { path: 'playlist', element: <Playlist /> },
       { path: 'Discover', element: <Discover /> },
       {path: 'upload' ,element: <Upload/> },
+      {path: 'profile' ,element: <Profile/> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
