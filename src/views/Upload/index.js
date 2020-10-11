@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   makeStyles,
   Container,
@@ -8,14 +8,19 @@ import {
   Card,
   CardContent,
   Button,
+  Avatar,
 } from "@material-ui/core";
 import swal from "sweetalert";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-
 import Page from "../../../src/components/Page";
 import AlbumIcon from "@material-ui/icons/Album";
-
 import firebase from "../../firebase";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Cover from "../../../src/images/cover.png";
+import bgupload from "../../../src/images/nblur.png";
+import "../../css/imgBlur.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
         borderColor: "#FF0A6C",
       },
     },
+    position: "relative",
   },
   notchedOutline: {
     borderWidth: "1px",
@@ -42,16 +48,29 @@ const useStyles = makeStyles((theme) => ({
   input: {
     display: "none",
   },
+  large: {
+    width: 150,
+    height: 150,
+  },
 }));
 
 const Upload = () => {
   const classes = useStyles();
-  const [image, setImage] = useState(null);
-  const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
-  const [music, setmusic] = useState(null);
   const [CurUser, setCurUser] = useState(null);
-  let [MusicID, setMusicID] = useState(1);
+  const [Progressimg, setProgressimg] = useState(0);
+  const [CurUsername, setCurUsername] = useState("");
+
+  //Upload
+  const [url, setUrl] = useState("");
+  const [image, setImage] = useState(null);
+  const [music, setmusic] = useState(null);
+
+  //musicDetail
+  const [MusicName, setMusicName] = useState("");
+  const [MusicGenre, setMusicGenre] = useState("");
+  const [Description, setDescription] = useState("");
+  const [Artist, setArtist] = useState("");
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -65,12 +84,41 @@ const Upload = () => {
     }
   };
 
-  const handleUploadmusic = () => {
+  function handleUploadmusic() {
+    //img
+    const uploadTaskimg = firebase
+      .storage()
+      .ref(`MusicImages/${image.name}`)
+      .put(image);
+    uploadTaskimg.on(
+      "state_changed",
+      (snapshot) => {
+        const progressIMG = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgressimg(progressIMG);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        firebase
+          .storage()
+          .ref("MusicImages")
+          .child(image.name)
+          .getDownloadURL()
+          .then((imgurl) => {
+            setTimeout(musicup(imgurl), 3000);
+          });
+      }
+    );
+  }
+
+  function musicup(imgurl) {
     const uploadTask = firebase
       .storage()
       .ref(`Music/${music.name}`)
       .put(music);
-
     console.log(uploadTask);
     uploadTask.on(
       "state_changed",
@@ -93,60 +141,63 @@ const Upload = () => {
             setUrl(url);
             firebase
               .database()
-              .ref(
-                "users/" +
-                  firebase.auth().currentUser.uid +
-                  "/cover" +
-                  `/${MusicID}`
-              )
+              .ref("musics/" + MusicGenre)
+              .push()
               .set({
                 MusicURL: url,
-              })
-              .then((setMusicID = MusicID++));
+                ImgMusicURL: imgurl,
+                MusicName: MusicName,
+                Description: Description,
+                Artist: Artist,
+                CoverBy: CurUsername,
+              });
+            putMycover(
+              url,
+              imgurl,
+              MusicName,
+              Description,
+              Artist,
+              CurUsername
+            );
           });
       }
     );
-  };
+  }
 
-  const handleUpload = () => {
-    const uploadTask = firebase
-      .storage()
-      .ref(`MusicImages/${image.name}`)
-      .put(image);
-
-    console.log(uploadTask);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(progress);
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        firebase
-          .storage()
-          .ref("MusicImages")
-          .child(image.name)
-          .getDownloadURL()
-          .then((url) => {
-            setUrl(url);
-            console.log("url => ", url);
-          });
-      }
-    );
-  };
-  const upLoadAll = () => {
-    handleUploadmusic();
-  };
+  function putMycover(
+    url,
+    imgurl,
+    MusicName,
+    Description,
+    Artist,
+    CurUsername
+  ) {
+    firebase
+      .database()
+      .ref("users/" + firebase.auth().currentUser.uid + "/covers")
+      .push()
+      .set({
+        MusicURL: url,
+        ImgMusicURL: imgurl,
+        MusicName: MusicName,
+        Description: Description,
+        Artist: Artist,
+        CoverBy: CurUsername,
+      });
+  }
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurUser(user);
+        firebase
+          .database()
+          .ref("/users/" + user.uid)
+          .once("value")
+          .then((snapshot) => {
+            let username = snapshot.val().FirstName || "-";
+            setCurUsername(username);
+          });
       } else {
         setCurUser(null);
       }
@@ -154,149 +205,194 @@ const Upload = () => {
   }, []);
 
   return (
-    <Page className={classes.root} title="UploadMusic">
-      <Container maxWidth={false}>
-        <Grid
-          alignItems="flex-end"
-          container
-          justify="space-between"
-          spacing={3}
-        >
-          <Grid item>
-            <Typography
-              component="h2"
-              gutterBottom
-              variant="overline"
-              color="textPrimary"
-            >
-              Upload Music
-            </Typography>
-            <Typography
-              component="h1"
-              variant="h4"
-              color="textPrimary"
-              className={classes.current}
-            >
-              อัพโหลดเพลง
-            </Typography>
-            <hr
-              style={{
-                color: "#FF0A6C",
-                height: 2.5,
-                backgroundColor: "#FF0A6C",
-                borderWidth: 0,
-                width: "110%",
-                borderRadius: 10,
-              }}
-            ></hr>
+    <Fragment>
+      <div
+        style={{
+          background: `url(${bgupload})`,
+          minHeight: "100vh",
+          width: "100%",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          position: "absolute",
+        }}
+        className="blur"
+      ></div>
+      
+      <Page className={classes.root} title="UploadMusic">
+        <Container maxWidth={false}>
+          <Grid alignItems="center" container justify="center" spacing={3}>
+            <Grid item>
+              <Typography
+                component="h1"
+                variant="h4"
+                color="textPrimary"
+                className={classes.current}
+                style={{marginTop: 40,textAlign: "center"}}
+              >
+                อัพโหลดเพลง Cover ของคุณ
+              </Typography>
+              <Typography
+                component="h1"
+                
+                color="textPrimary"
+                className={classes.current}
+                style={{marginTop: 14,fontSize: 13.8,color: '#bcbcbc',textAlign: 'center'}}
+              >
+                แบ่งปันเพลงต่างๆในเวอร์ชั่นของคุณให้คนอื่นใน Aria ฟังดูสิ!
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Card className={classes.paper}>
-              <CardContent>
-                <Grid container spacing={3}>
-                  <Grid item md={12}>
-                    <input
-                      className={classes.input}
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={handleChangemusic}
-                    />
-
-                    <label htmlFor="contained-button-file">
+          {/* <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Card className={classes.paper}>
+                <CardContent>
+                  <Grid container spacing={3}>
+                    <Grid item md={12}>
+                      {image === null ? (
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={Cover}
+                          className={classes.large}
+                        />
+                      ) : (
+                        <Avatar
+                          src={image ? URL.createObjectURL(image) : null}
+                          alt={image ? image.name : null}
+                          className={classes.large}
+                        />
+                      )}
+                    </Grid>
+                    <Grid item md={12}>
+                      <input
+                        // accept="image/*"
+                        className={classes.input}
+                        id="contained-button-files"
+                        multiple
+                        type="file"
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="contained-button-files">
+                        <Button
+                          startIcon={<AddAPhotoIcon />}
+                          variant="contained"
+                          color="primary"
+                          component="span"
+                        >
+                          อัพโหลดปกเพลง
+                        </Button>
+                      </label>
+                    </Grid>
+                    somezfzgzg
+                    <Grid item md={12}>
+                      <input
+                        className={classes.input}
+                        id="contained-button-file"
+                        multiple
+                        type="file"
+                        onChange={handleChangemusic}
+                      />
+                      <label htmlFor="contained-button-file">
+                        <Button
+                          startIcon={<AddAPhotoIcon />}
+                          variant="contained"
+                          color="primary"
+                          component="span"
+                        >
+                          อัพโหลดเพลง
+                        </Button>
+                      </label>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <Card variant="outlined">
+                <CardContent>
+                  <Grid container spacing={3}>
+                    <Grid item md={12}>
+                      <TextField
+                        id="outlined-basic"
+                        label="ชื่อเพลง"
+                        variant="outlined"
+                        fullWidth
+                        onChange={(e) => setMusicName(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item md={12}>
+                      <FormControl
+                        variant="outlined"
+                        className={classes.textFieldPosition}
+                        fullWidth
+                      >
+                        <InputLabel id="demo-simple-select-outlined-label">
+                          แนวเพลง
+                        </InputLabel>
+                        <Select
+                          native
+                          value={MusicGenre}
+                          onChange={(e) => setMusicGenre(e.target.value)}
+                          label="แนวเพลง"
+                          inputProps={{
+                            name: "MusicGenre",
+                          }}
+                        >
+                          <option aria-label="None" value="" />
+                          <option value={"Classic"}>คลาสสิก (Classic)</option>
+                          <option value={"POP"}>ป๊อป (POP)</option>
+                          <option value={"Jazz"}>แจ๊ส (Jazz)</option>
+                          <option value={"folk"}>ลูกทุ่ง (folk)</option>
+                          <option value={"R&B"}>ริทึมแอนด์บลูส์ (R&B)</option>
+                          <option value={"Rap"}>แร็พ (Rap)</option>
+                          <option value={"HiHop"}>ฮิปฮอป (Hip hop)</option>
+                          <option value={"Rock"}>ร็อก (Rock)</option>
+                          <option value={"Electronic"}>
+                            อิเล็คโทรนิค (Electronic)
+                          </option>
+                          <option value={"etc"}>อื่นๆ</option>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item md={12}>
+                      <TextField
+                        id="outlined-multiline-static"
+                        label="คำอธิบาย"
+                        multiline
+                        fullWidth
+                        rows={4}
+                        variant="outlined"
+                        placeholder="เพิ่มคำอธิบายเพลงของคุณ"
+                        onChange={(e) => setDescription(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item md={12}>
+                      <TextField
+                        id="outlined-basics"
+                        label="ชื่อศิลปินต้นฉบับเพลง"
+                        variant="outlined"
+                        fullWidth
+                        onChange={(e) => setArtist(e.target.value)}
+                      />
+                    </Grid>
+                    <Grid item md={12} style={{ textAlign: "right" }}>
                       <Button
-                        startIcon={<AddAPhotoIcon />}
                         variant="contained"
+                        size="medium"
                         color="primary"
-                        component="span"
+                        startIcon={<AlbumIcon />}
+                        onClick={handleUploadmusic}
                       >
                         อัพโหลดเพลง
                       </Button>
-                    </label>
+                    </Grid>
                   </Grid>
-                  {/* <Grid item md={12}>
-                    <input
-                      accept="image/*"
-                      className={classes.input}
-                      id="contained-button-file"
-                      multiple
-                      type="file"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="contained-button-file">
-                      <Button
-                        startIcon={<AddAPhotoIcon />}
-                        variant="contained"
-                        color="primary"
-                        component="span"
-                      >
-                        อัพโหลดปกเพลง
-                      </Button>
-                    </label>
-                  </Grid> */}
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sm={6} md={6}>
-            <Card variant="outlined">
-              <CardContent>
-                <Grid container spacing={3}>
-                  <Grid item md={12}>
-                    <TextField
-                      id="outlined-basic"
-                      label="ชื่อเพลง"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item md={12}>
-                    <TextField
-                      id="outlined-basic"
-                      label="ประเภทของเพลง"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item md={12}>
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="คำอธิบาย"
-                      multiline
-                      fullWidth
-                      rows={4}
-                      variant="outlined"
-                      placeholder="เพิ่มคำอธิบายเพลงของคุณ"
-                    />
-                  </Grid>
-                  <Grid item md={12}>
-                    <TextField
-                      id="outlined-basic"
-                      label="ชื่อศิลปินต้นฉบับเพลง"
-                      variant="outlined"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item md={12} style={{ textAlign: "right" }}>
-                    <Button
-                      variant="contained"
-                      size="medium"
-                      color="primary"
-                      startIcon={<AlbumIcon />}
-                      onClick={upLoadAll}
-                    >
-                      อัพโหลดเพลง
-                    </Button>
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container>
-    </Page>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid> */}
+        </Container>
+      </Page>
+    </Fragment>
   );
 };
 

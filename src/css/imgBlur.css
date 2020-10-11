@@ -1,0 +1,5 @@
+.blur {
+  filter: blur(35px);
+  -webkit-filter: blur(35px);
+}
+

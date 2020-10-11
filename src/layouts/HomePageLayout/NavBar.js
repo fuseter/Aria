@@ -96,8 +96,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbarcolor: {
-    background: "rgba(0,0,0,0.8)",
-    // backgroundColor: "#111111",
+    backgroundColor: "#111111",
   },
   logo: {
     width: 100,
@@ -192,7 +191,7 @@ export default function PrimarySearchAppBar(props) {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        setCurUser(user)
+        setCurUser(user);
         firebase
           .database()
           .ref("/users/" + user.uid)

@@ -65,13 +65,13 @@ export default function SignIn() {
   console.log("Currentuser => ", CurrentUser);
 
   // useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCurrentUser(user);
-      } else {
-        setCurrentUser("");
-      }
-    });
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setCurrentUser(user);
+    } else {
+      setCurrentUser("");
+    }
+  });
   // }, []);
 
   function Login(event) {
@@ -150,11 +150,6 @@ export default function SignIn() {
                 เข้าสู่ระบบ
               </Button>
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    ลืมรหัสผ่าน?
-                  </Link>
-                </Grid>
                 <Grid item>
                   <Link href="auth/register" variant="body2">
                     {"ยังไม่มีบัญชีผู้ใช้ ? ลงทะเบียน"}
