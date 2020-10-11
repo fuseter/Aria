@@ -4,7 +4,7 @@ import typography from './typography';
 
 
 const backgroundColor = '#222222'
-const NavbarColor = '#101010'
+const NavbarColor = '#111111'
 const textColor = '#ffffff'
 const primary = "#FF0A6C"
 
@@ -21,7 +21,7 @@ const theme = createMuiTheme({
       main:  primary
     },
     secondary: {
-      main: "#000000"
+      main: "#111111"
     },
     text: {
       primary: textColor,

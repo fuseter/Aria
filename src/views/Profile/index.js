@@ -12,101 +12,148 @@ import Container from "@material-ui/core/Container";
 import Page from "../../../src/components/Page";
 import bgLogin from "../../../src/images/BG.png";
 import { useNavigate } from "react-router-dom";
-
+import CardMedia from "@material-ui/core/CardMedia";
 import firebase from "../../firebase";
 
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 
-import img from "../../../src/images/2.png";
+import img from "../../../src/images/download.jpg";
+import bgimage from "../../../src/images/Artboard.png";
+import "../../../src/css/imgBlur.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(8),
   },
   card: {
-    opacity: 0.7,
+    opacity: 1,
   },
   large: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 200,
+    marginTop: 70,
   },
   button: {
     width: 800,
     height: 50,
   },
   profile: {},
+  bg: {
+    position: "relative",
+  },
 }));
 
 export default function SignIn() {
   const classes = useStyles();
+  const [CurUser, setCurUser] = useState(null);
+  const [CurUsername, setCurUsername] = useState("");
+  const [CurLastname, setCurLastrname] = useState("");
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCurUser(user);
+        firebase
+          .database()
+          .ref("/users/" + user.uid)
+          .once("value")
+          .then((snapshot) => {
+            let username = snapshot.val().FirstName || "-";
+            let lastname = snapshot.val().LastName || "-";
+            setCurUsername(username);
+            setCurLastrname(lastname);
+          });
+      } else setCurUser(null);
+    });
+  }, []);
 
   return (
-    <Page className={classes.root} title="Profile">
-      <Container maxWidth="md">
-        <Typography>
-          <Card className={classes.card} variant="outlined">
+    <Fragment>
+      <div
+        style={{
+          // รูปพื้นหลัง
+          background: `url(${img})`,
+          backgroundSize: "Cover",
+          backgroundRepeat: "no-repeat",
+          position: "absolute",
+          minHeight: "60vh",
+          width: "100%",
+          zIndex: "-100",
+        }}
+        className="blur"
+      ></div>
+
+      <Page className={classes.root} title="Profile">
+        {/* <Card className={classes.bg} variant="outlined"> */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            // marginTop: 45,
+            marginBottom: 20,
+          }}
+        >
+          {/* รูปโปรไฟล์ */}
+          <Avatar alt="" src={img} className={classes.large} />
+        </div>
+        {/* <CardContent> */}
+        <Grid container maxWidth="xs">
+          <Grid item xs={12} sm={6}>
             <div
               style={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "20vh",
+                justifyContent: "flex-end",
+                alignItems: "left",
+                marginRight: 15,
+                fontSize: 40,
+                color: "#fff",
               }}
             >
-              <Avatar alt="" src={img} className={classes.large} />
+              {CurUsername} {/* ชื่อจริง */}
             </div>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "right",
+                marginLeft: 15,
+                fontSize: 40,
+                color: "#fff",
+              }}
+            >
+              {CurLastname} {/* นามสกุล */}
+            </div>
+          </Grid>
+        </Grid>
+        {/* </CardContent> */}
 
-            <CardContent>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <form
-                    className={classes.profile}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <TextField
-                      id="outlined-basic"
-                      label="ชื่อ"
-                      variant="outlined"
-                      style={{ textAlign: "center" }}
-                      fullWidth
-                      placeholder="กรอกชื่่อ"
-                    />
-                  </form>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <form
-                    className={classes.profile}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <TextField
-                      id="outlined-basic"
-                      label="นามสกุล"
-                      variant="outlined"
-                      style={{ textAlign: "center" }}
-                      fullWidth
-                      placeholder="กรอกนามสกุล"
-                    />
-                    
-                  </form>
-                </Grid>
-              </Grid>
-            </CardContent>
-            <Button 
-                //className={classes.button}
-                
-                fullWidth
-                size="large"
-                variant="contained" 
-                color="primary">
-                  ยืนยัน
-                </Button>
-          </Card>
-        </Typography>
-      </Container>
-    </Page>
+        <hr
+          style={{
+            marginLeft: 500,
+            marginRight: 500,
+            marginTop: 20,
+            height: 0.1,
+          }}
+        ></hr>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 45,
+            marginBottom: 35,
+            color: "#fff",
+          }}
+        >
+          เพลงของฉัน
+        </div>
+        {/* </Card> */}
+      </Page>
+    </Fragment>
   );
 }
