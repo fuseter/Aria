@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from "react";
+import React, { useState, Component, useEffect ,useContext} from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -11,6 +11,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import firebase from "../../../../firebase";
 import iconPlay from "../../../../images/play-button.png";
 import { useLocation } from "react-router-dom";
+import "../../../../../src/css/imgBlur.css";
+import { GolbalContext } from "../../../../App";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -48,33 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const song = [
-  {
-    name: "Blessing it",
-    author: "Lal",
-    time: "3:24",
-  },
-  {
-    name: "Horn in the middle",
-    author: "Sos",
-    time: "4:09",
-  },
-  {
-    name: "Lady Brown",
-    author: "Zus",
-    time: "3:19",
-  },
-  {
-    name: "Kumomi",
-    author: "Amit",
-    time: "3:54",
-  },
-  {
-    name: "High 2 lows",
-    author: "Pucy",
-    time: "4:38",
-  },
-];
 export default function Category() {
   const classes = useStyles();
   const theme = useTheme();
@@ -82,9 +57,16 @@ export default function Category() {
   const [CurUser, setCurUser] = useState(null);
   const location = useLocation();
   const music = location.state.music;
+  const type = location.state.type;
+  const img = location.state.img;
+  const dis = location.state.dis;
+  const { dispatch } = useContext(GolbalContext);
+
+
+
+
 
   console.log("music => ", music);
-
   const clg = () => {
     console.log("click => button play");
   };
@@ -124,28 +106,32 @@ export default function Category() {
         <Card item xs={12}>
           <div
             style={{
-              height: "250px",
-              marginTop: "64px",
-            }}
+              height: "50px",
+              // marginTop: "50px",
+              background: `url(${img})`,
+            }} className="blur"
           >
-            <Card className={classes.root}>
-              <CardMedia
-                className={classes.cover}
-                image="https://yt3.ggpht.com/Hzg8rsufWyw8ekK0NguBDH8l4mjRGd0IhLdrITxgDu9hnV36xOUsB3w7ta0S8OCQiEiOmP_rYw=s900-c-k-c0x00ffffff-no-rj"
-                title="Live from space album cover"
-              />
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
-                  <Typography component="h2" variant="h2">
-                    ชื่อประเภท
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Name Catagory
-                  </Typography>
-                </CardContent>
-              </div>
-            </Card>
+
           </div>
+          <Card className={classes.root} style={{
+            marginBottom: "100px"
+          }}>
+            <CardMedia
+              className={classes.cover}
+              image={img}
+              title="Live from space album cover"
+            />
+            <div className={classes.details}>
+              <CardContent className={classes.content}>
+                <Typography component="h2" variant="h2">
+                  {type}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary">
+                  {dis}
+                </Typography>
+              </CardContent>
+            </div>
+          </Card>
         </Card>
       </div>
       <Typography
@@ -169,7 +155,9 @@ export default function Category() {
                 <ListItem button>
                   <img
                     alt="play"
-                    onClick={clg}
+                    onClick={() =>
+                      dispatch({ type: "SET_URL", payload: res.MusicURL })
+                    }
                     src={iconPlay}
                     style={{
                       width: "20px",
