@@ -8,23 +8,16 @@ const useStyles = makeStyles((theme) => ({
   root: {},
 }));
 
-export default function AudioPlayer() {
+export default function AudioPlayer(audio) {
   const location = useLocation();
-  const music = location.state.music;
-  const classes = useStyles();
-
-
-  console.log("gg  => " , music)
-
-
-
+  // const music = location.state.music;
+  // const classes = useStyles();
 
   
-
   return (
     <div>
       <Grid item>
-        <ReactAudioPlayer  autoPlay controls />
+        <ReactAudioPlayer  src={audio} autoPlay controls />
       </Grid>
     </div>
   );

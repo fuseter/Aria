@@ -9,13 +9,8 @@ import "../../../src/css/imgBlur.css";
 import "../../../src/css/imagesHover.css";
 import { Container, Typography } from "@material-ui/core";
 import iconPlay from "../../../src/images/play-button.png";
-import { keys } from "@material-ui/core/styles/createBreakpoints";
 import Skeleton from "@material-ui/lab/Skeleton";
-import ReactAudioPlayer from "react-audio-player";
 import Player from "../../../src/components/AudioPlayer/index";
-
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,11 +39,9 @@ export default function Profile() {
   const [CurUser, setCurUser] = useState(null);
   const [CurUsername, setCurUsername] = useState("");
   const [CurLastname, setCurLastrname] = useState("");
-  const [UserProfile, setUserProfile] = useState("")
+  const [UserProfile, setUserProfile] = useState("");
   const [MusicData, setMusicData] = useState([]);
   // const [UserData, setUserData] = useState([]);
-
-
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -64,7 +57,7 @@ export default function Profile() {
             let userProfile = snapshot.val().UserProfile || "-";
             setCurUsername(username);
             setCurLastrname(lastname);
-            setUserProfile(userProfile)
+            setUserProfile(userProfile);
           });
 
         // firebase
@@ -149,12 +142,24 @@ export default function Profile() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  fontSize: 40,
+                  fontSize: 35,
                   color: "#fff",
                 }}
               >
                 {CurUsername} {CurLastname}
               </div>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Typography
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: 17,
+                  color: "#bcbcbc",
+                }}
+              >
+                ผู้ใช้งาน
+              </Typography>
             </Grid>
           </Grid>
 
@@ -178,24 +183,16 @@ export default function Profile() {
               fontSize: 20,
             }}
           >
-            {MusicData.map((res, index) => {
+            {MusicData.map((res) => {
               return (
                 <div style={{ margin: "20px" }}>
                   <Fragment>
-                    {/* <div className="team-area"> */}
                     <div className="sigle-team">
-                      <img alt="img1" src={res.ImgMusicURL} />
+                      <img alt="musicimg" src={res.ImgMusicURL} />
                       <div className="team-text">
-                        <Link to="/" state={{ music: res }}>
-                          <img
-                            alt="play"
-                            // onClick={(e) => console.log("res =>", res)}
-                            src={iconPlay}
-                          />
-                        </Link>
+                        <img alt="play" src={iconPlay} />
                       </div>
                     </div>
-                    {/* </div> */}
                   </Fragment>
                 </div>
               );

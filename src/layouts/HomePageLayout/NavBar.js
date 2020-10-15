@@ -294,10 +294,19 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.grow} />
 
               <div className={classes.sectionDesktop}>
+
                 <Grid container spacing={3}>
+
+
+
                   <Grid>
-                  {/* <AudioPlayer/> */}
+                  <AudioPlayer audio={""}/>
                   </Grid>
+
+{
+  //พวกอัลบัม อยู่ไฟล์ไหน
+  
+}
 
                   {CurUser ? (
                     <Fragment>
