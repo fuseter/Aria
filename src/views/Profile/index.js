@@ -13,12 +13,14 @@ import firebase from "../../firebase";
 import img from "../../../src/images/download.jpg";
 import "../../../src/css/imgBlur.css";
 import "../../../src/css/imagesHover.css";
-import { Container, Typography } from "@material-ui/core";
+import { Card, Container, Typography } from "@material-ui/core";
 import iconPlay from "../../../src/images/play-button.png";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
 import { GolbalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../layouts/Footer";
+import GridList from "@material-ui/core/GridList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -169,15 +171,20 @@ export default function Profile() {
             }}
           ></hr>
           <div>{/* <Player audio={audioURL}/> */}</div>
-          <Typography style={{
+          <Typography
+            style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginTop: 20,
               marginBottom: -30,
               color: "#fff",
-              fontSize: 25}}>เพลงของฉัน</Typography>
-          
+              fontSize: 25,
+            }}
+          >
+            เพลงของฉัน
+          </Typography>
+
           <div
             style={{
               display: "flex",
@@ -189,26 +196,61 @@ export default function Profile() {
               fontSize: 20,
             }}
           >
-            {MusicData.map((res) => {
-              return (
-                <div style={{ margin: "20px" }}>
-                  <Fragment>
-                    <div className="sigle-team">
-                      <img alt="musicimg" src={res.ImgMusicURL} />
-                      <div className="team-text">
-                        <img
-                          alt="play"
-                          src={iconPlay}
-                          onClick={() =>
-                            dispatch({ type: "SET_URL", payload: res.MusicURL })
-                          }
-                        />
-                      </div>
+            <div
+              style={{
+                width: "80%",
+                height: "auto",
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "left",
+                overflow: "hidden",
+              }}
+              cols={3}
+            >
+              {MusicData.map((res) => {
+                return (
+                  <div
+                    style={{
+                      marginTop: "30px",
+                      marginBottom: "15px",
+                      marginLeft: "15px",
+                      marginRight: "15px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        height: "auto",
+                        width: "250px",
+                        // justifyContent:"center",
+                        // alignItems:"center",
+                        // textAlign:"center"
+                      }}
+                    >
+                      <Fragment>
+                        <div className="sigle-team">
+                          <img alt="musicimg" src={res.ImgMusicURL} />
+                          <div className="team-text">
+                            <img
+                              alt="play"
+                              src={iconPlay}
+                              onClick={() =>
+                                dispatch({
+                                  type: "SET_URL",
+                                  payload: res.MusicURL,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <br></br>
+                        <Typography>{res.MusicName}</Typography>
+                        <Typography>ศิลปิน : {res.Artist}</Typography>
+                      </Fragment>
                     </div>
-                  </Fragment>
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Page>
         {/* <Footer/> */}
