@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import firebase from "../../../../firebase";
 import iconPlay from "../../../../images/play-button.png";
 import { useLocation } from "react-router-dom";
+import "../../../../../src/css/imgBlur.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -82,9 +83,15 @@ export default function Category() {
   const [CurUser, setCurUser] = useState(null);
   const location = useLocation();
   const music = location.state.music;
+  const type = location.state.type;
+  const img = location.state.img;
+  const dis = location.state.dis;
+
+
+
+
 
   console.log("music => ", music);
-
   const clg = () => {
     console.log("click => button play");
   };
@@ -124,28 +131,32 @@ export default function Category() {
         <Card item xs={12}>
           <div
             style={{
-              height: "250px",
-              marginTop: "64px",
-            }}
+              height: "50px",
+              // marginTop: "50px",
+              background: `url(${img})`,
+            }}  className="blur"
           >
-            <Card className={classes.root}>
+            
+          </div>
+          <Card className={classes.root} style={{
+            marginBottom:"100px"
+          }}>
               <CardMedia
                 className={classes.cover}
-                image="https://yt3.ggpht.com/Hzg8rsufWyw8ekK0NguBDH8l4mjRGd0IhLdrITxgDu9hnV36xOUsB3w7ta0S8OCQiEiOmP_rYw=s900-c-k-c0x00ffffff-no-rj"
+                image={img}
                 title="Live from space album cover"
               />
               <div className={classes.details}>
                 <CardContent className={classes.content}>
                   <Typography component="h2" variant="h2">
-                    ชื่อประเภท
+                    {type}
                   </Typography>
                   <Typography variant="subtitle1" color="textSecondary">
-                    Name Catagory
+                    {dis}
                   </Typography>
                 </CardContent>
               </div>
             </Card>
-          </div>
         </Card>
       </div>
       <Typography
