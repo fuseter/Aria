@@ -12,14 +12,6 @@ import "swiper/components/scrollbar/scrollbar.scss";
 
 import firebase from "../../../../firebase";
 
-import img1 from "../../../../images/1.png";
-import img2 from "../../../../images/2.png";
-import img3 from "../../../../images/3.png";
-import img4 from "../../../../images/4.png";
-import img5 from "../../../../images/5.png";
-import img6 from "../../../../images/6.png";
-import img7 from "../../../../images/7.png";
-
 SwiperCore.use([Pagination]);
 
 const useStyles = makeStyles((theme) => ({
@@ -43,44 +35,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "25px",
   },
 }));
-
-const tile = [
-  {
-    img: img1,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img2,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img3,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img4,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img5,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img6,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img7,
-    title: "Image",
-    author: "author",
-  },
-];
 
 export default function Artis() {
   const classes = useStyles();

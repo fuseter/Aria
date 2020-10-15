@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 
 import SwiperCore, { Pagination } from "swiper";
 
@@ -12,13 +12,7 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
 
-import img1 from "../../../../images/1.png";
-import img2 from "../../../../images/2.png";
-import img3 from "../../../../images/3.png";
-import img4 from "../../../../images/4.png";
-import img5 from "../../../../images/5.png";
-import img6 from "../../../../images/6.png";
-import img7 from "../../../../images/7.png";
+import firebase from "../../../../firebase";
 
 SwiperCore.use([Pagination]);
 
@@ -44,49 +38,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tile = [
-  {
-    img: img1,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img2,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img3,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img4,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img5,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img6,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img7,
-    title: "Image",
-    author: "author",
-  },
-];
 
 export default function Artis() {
   const classes = useStyles();
+  const [CurUser, setCurUser] = useState(null);
+  const [MusicData, setMusicData] = useState([]);
+
   const clg = () => {
     console.log("click => button play");
   };
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCurUser(user);
+      } else setCurUser(null);
+    });
+    feachMusic();
+  }, []);
+
+  function feachMusic() {
+    firebase
+      .database()
+      .ref("musics/Classic/")
+      .on(
+        "value",
+        (snapshot) => {
+          let data = [];
+          snapshot.forEach((snap) => {
+            data.push(snap.val());
+          });
+          setMusicData(data);
+        },
+        (errorObject) => {
+          console.log("The read failed: " + errorObject.code);
+        }
+      );
+  }
+
   return (
     <div>
       <div
@@ -102,11 +91,9 @@ export default function Artis() {
             slidesPerView: 4,
             spaceBetween: 30,
             centeredSlides: true,
-              el: '.swiper-pagination',
-              clickable: true,
-              
+            el: ".swiper-pagination",
+            clickable: true,
           }}
-            
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -122,35 +109,21 @@ export default function Artis() {
             },
           }}
         >
-          {tile.map((tile) => (
+          {MusicData.map((res) => (
             <SwiperSlide>
-              {/* <GridListTile key={tile.img}> */}
-              {/* <img src={tile.img} alt={tile.title} /> */}
-              {/* <GridListTileBar */}
-              {/* //         title={tile.title}
-            //         subtitle={<span>by: {tile.author}</span>}
-            //         actionIcon={ */}
-              {/* <IconButton aria-label={`info about ${tile.title}`}>
-                         <div className="team-text">
-                           <img alt="play" onClick={clg} src={iconPlay} />
-                         </div>
-                       </IconButton>
-                     }
-                   /> */}
               <Fragment>
                 <div className="sigle-team">
-                  <img alt="img1" src={tile.img} />
+                  <img alt="img1" src={res.ImgMusicURL} />
                   <div className="team-text">
                     <img alt="play" onClick={clg} src={iconPlay} />
                   </div>
                 </div>
                 <div style={{ margin: 10, color: "grey" }}>
-                  {tile.title}
+                  {res.MusicName} - {res.Artist}
                   <br></br>
-                  <span>by: {tile.author}</span>
+                  <span>by: {res.CoverBy}</span>
                 </div>
               </Fragment>
-              {/* </GridListTile> */}
             </SwiperSlide>
           ))}
         </Swiper>

@@ -448,7 +448,7 @@ const Upload = () => {
                           <option value={"folk"}>ลูกทุ่ง (folk)</option>
                           <option value={"R&B"}>ริทึมแอนด์บลูส์ (R&B)</option>
                           <option value={"Rap"}>แร็พ (Rap)</option>
-                          <option value={"HiHop"}>ฮิปฮอป (Hip hop)</option>
+                          <option value={"HipHop"}>ฮิปฮอป (Hip hop)</option>
                           <option value={"Rock"}>ร็อก (Rock)</option>
                           <option value={"Electronic"}>
                             อิเล็คโทรนิค (Electronic)
