@@ -179,7 +179,16 @@ export default function SignIn() {
               height: 0.1,
             }}
           ></hr>
-
+          <div>{/* <Player audio={audioURL}/> */}</div>
+          <Typography style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+              marginBottom: -30,
+              color: "#fff",
+              fontSize: 25}}>เพลงของฉัน</Typography>
+          
           <div
             style={{
               display: "flex",
