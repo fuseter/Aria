@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     color: "white",
     letterSpacing: "1.25px",
-    fontSize: "25px",
+    fontSize: "30px",
     padding: 20,
     paddingLeft: 50,
   },
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Category() {
   const classes = useStyles();
+  // const [MusicData, setMusicData] = useState([]);
 
   return (
     <div>

@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
+import React, {  useState, useEffect, Fragment } from "react";
 
 import SwiperCore, { Pagination } from "swiper";
-
 import { makeStyles } from "@material-ui/core/styles";
 import iconPlay from "../../../../images/play-button.png";
 import "../../../../css/imagesHover.css";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
+
+import firebase from "../../../../firebase";
 
 import img1 from "../../../../images/1.png";
 import img2 from "../../../../images/2.png";
@@ -84,9 +84,43 @@ const tile = [
 
 export default function Artis() {
   const classes = useStyles();
+  const [CurUser, setCurUser] = useState(null);
+  const [Artis, setArtis] = useState([])
+
+
+
   const clg = () => {
     console.log("click => button play");
   };
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        setCurUser(user);
+      } else setCurUser(null);
+    });
+    feachArtis();
+  }, []);
+
+  function feachArtis() {
+    firebase
+      .database()
+      .ref("/users")
+      .on(
+        "value",
+        (snapshot) => {
+          let data = [];
+          snapshot.forEach((snap) => {
+            data.push(snap.val());
+          });
+          setArtis(data);
+        },
+        (errorObject) => {
+          console.log("The read failed: " + errorObject.code);
+        }
+      );
+  }
+
   return (
     <div>
       <div
@@ -111,11 +145,9 @@ export default function Artis() {
             slidesPerView: 4,
             spaceBetween: 30,
             centeredSlides: true,
-              el: '.swiper-pagination',
-              clickable: true,
-              
+            el: ".swiper-pagination",
+            clickable: true,
           }}
-            
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -131,7 +163,7 @@ export default function Artis() {
             },
           }}
         >
-          {tile.map((tile) => (
+          {Artis.map((res) => (
             <SwiperSlide>
               {/* <GridListTile key={tile.img}> */}
               {/* <img src={tile.img} alt={tile.title} /> */}
@@ -148,15 +180,15 @@ export default function Artis() {
                    /> */}
               <Fragment>
                 <div className="sigle-team">
-                  <img alt="img1" src={tile.img} />
+                  <img alt="img1" src={res.UserProfile} />
                   <div className="team-text">
                     <img alt="play" onClick={clg} src={iconPlay} />
                   </div>
                 </div>
                 <div style={{ margin: 10, color: "grey" }}>
-                  {tile.title}
-                  <br></br>
-                  <span>by: {tile.author}</span>
+                  {res.FirstName} {res.LastName}
+         
+             
                 </div>
               </Fragment>
               {/* </GridListTile> */}

@@ -124,19 +124,6 @@ export default function Artis() {
         >
           {tile.map((tile) => (
             <SwiperSlide>
-              {/* <GridListTile key={tile.img}> */}
-              {/* <img src={tile.img} alt={tile.title} /> */}
-              {/* <GridListTileBar */}
-              {/* //         title={tile.title}
-            //         subtitle={<span>by: {tile.author}</span>}
-            //         actionIcon={ */}
-              {/* <IconButton aria-label={`info about ${tile.title}`}>
-                         <div className="team-text">
-                           <img alt="play" onClick={clg} src={iconPlay} />
-                         </div>
-                       </IconButton>
-                     }
-                   /> */}
               <Fragment>
                 <div className="sigle-team">
                   <img alt="img1" src={tile.img} />
