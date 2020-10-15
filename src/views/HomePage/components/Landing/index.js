@@ -85,45 +85,9 @@ export default function LandingLayout() {
                             md={6}
                             className={classes.cardWrapper}
                         >
-                            {/* <div className={classes.card}>
-                                <div data-aos="fade-down">
-                                    <form>
-                                        <Typography
-                                            variant="h2"
-                                            component="h2"
-                                            gutterBottom
-                                            style={{ color: "#000000" }}
-                                        >
-                                            CloudSpace
-                                        </Typography>
-                                        <Typography className={classes.font}>
-                                            Fulfillment คือบริการคลังสินค้าพร้อมจัดส่ง
-                                        </Typography>
-                                        <Typography className={classes.font}>
-                                            เป็นบริการที่อำนวยความสะดวกเพื่อธุรกิจค้าขายออนไลน์หรือธุรกิจ E-Commerce  ในเรื่องของ
-                                        </Typography>
-                                        <Typography className={classes.font}>
-                                            พื้นที่จัดเก็บสินค้า (คลังสินค้า) การแพ็คสินค้า
-                                        </Typography>
-                                        <Typography className={classes.font}>
-                                            และการจัดส่งสินค้า
-                                        </Typography>
-                                        <Link to="/register">
-                                            <Button
-                                                variant="contained"
-                                                size="large"
-                                                endIcon={
-                                                    <KeyboardArrowRightIcon />
-                                                }
-                                                className={classes.button}
-                                                color="primary"
-                                            >
-                                                เริ่มต้นใช้งาน
-                                            </Button>
-                                        </Link>
-                                    </form>
-                                </div>
-                            </div> */}
+
+
+    <Typography>scscscsc</Typography>
                         </Grid>
                         <Grid
                             item
@@ -136,10 +100,7 @@ export default function LandingLayout() {
                                 data-aos="fade-up"
                                 data-aos-anchor-placement="center-bottom"
                             >
-                                {/* <img
-                                    src={warehouse}
-                                    className={classes.warehouse}
-                                /> */}
+                   
                             </div>
      
                         </Grid>

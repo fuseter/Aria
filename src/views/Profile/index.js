@@ -4,20 +4,19 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
-
 import img from "../../../src/images/download.jpg";
 import "../../../src/css/imgBlur.css";
 import "../../../src/css/imagesHover.css";
 import { Container, Typography } from "@material-ui/core";
-
-//test
-import img1 from "../../../src/images/modern-music-event-poster-template_1361-1292.jpg";
-import img2 from "../../../src/images/music-event-poster-template-with-colorful-shapes_1361-1591.jpg";
-
 import iconPlay from "../../../src/images/play-button.png";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import Skeleton from "@material-ui/lab/Skeleton";
 import ReactAudioPlayer from "react-audio-player";
+import Player from "../../../src/components/AudioPlayer/index";
+
+import {Link} from 'react-router-dom'
+import { useLocation } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,18 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Profile() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
   const [CurUsername, setCurUsername] = useState("");
   const [CurLastname, setCurLastrname] = useState("");
   const [MusicData, setMusicData] = useState([]);
-
-  console.log("test => ", MusicData);
-
-  const clg = () => {
-    console.log("click => button play");
-  };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -93,10 +86,6 @@ export default function SignIn() {
         }
       );
   }
-
-  // var db = firebase.database();
-  // var ref = db.ref("musics/Rock/");
-  // let Data = [];
 
   function feachUser() {
     firebase
@@ -188,19 +177,22 @@ export default function SignIn() {
               fontSize: 20,
             }}
           >
-            {MusicData.map((res) => {
+            {MusicData.map((res, index) => {
               return (
                 <Fragment>
-                  <audio style={{backgroundColor : "#000"}}  controls>
-                    <source  src={res.MusicURL} type="audio/ogg" />
-                  </audio>
                   {/* <div className="team-area"> */}
-                    <div className="sigle-team">
-                      <img alt="img1" src={res.ImgMusicURL} />
-                      <div className="team-text">
-                        <img alt="play" onClick={clg} src={iconPlay} />
-                      </div>
+                  <div className="sigle-team">
+                    <img alt="img1" src={res.ImgMusicURL} />
+                    <div className="team-text">
+                      <Link to="/" state={{music : res}}>
+                        <img
+                          alt="play"
+                          // onClick={(e) => console.log("res =>", res)}
+                          src={iconPlay}
+                        />
+                      </Link>
                     </div>
+                  </div>
                   {/* </div> */}
                 </Fragment>
               );
@@ -241,7 +233,6 @@ export default function SignIn() {
               </div>
             </div>
           </Container> */}
-
         </Page>
       </Fragment>
     );

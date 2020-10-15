@@ -4,6 +4,8 @@ import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
 import Carousel from "./components/carousel";
 import LandingPage from "./components/Landing";
+import ReactAudioPlayer from "react-audio-player";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -16,8 +18,14 @@ const Homepage = () => {
   const classes = useStyles();
   const [CurrentUser, setCurrentUser] = useState(null);
   const [Email, setEmail] = useState("");
+  const location = useLocation();
+  const music = location.state.music;
 
-  console.log("Currentuser => ", CurrentUser);
+
+
+  console.log("เพลงที่ส่งมา => ", music);
+
+
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -37,6 +45,9 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
+      <Grid item style={{ marginTop: 200 }}>
+        {/* <ReactAudioPlayer src={music.MusicURL} autoPlay controls /> */}
+      </Grid>
       <LandingPage />
     </Page>
   );
