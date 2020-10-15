@@ -1,7 +1,7 @@
-import React,{Fragment} from 'react';
-import  { Outlet }  from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
-import Nav from './NavBar'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+import Nav from "./NavBar";
 
 const useStyles = makeStyles((theme) => ({
   // root: {

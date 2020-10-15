@@ -8,6 +8,8 @@ import Catagory from "./components/Catagory"
 import LandingPage from "./components/Landing";
 import { BorderAll } from "@material-ui/icons";
 // import Player from "./components/Player";
+import ReactAudioPlayer from "react-audio-player";
+import { useLocation } from "react-router-dom";
 import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,8 +23,14 @@ const Homepage = () => {
   const classes = useStyles();
   const [CurrentUser, setCurrentUser] = useState(null);
   const [Email, setEmail] = useState("");
+  // const location = useLocation();
+  // const music = location.state.music;
 
-  console.log("Currentuser => ", CurrentUser);
+
+
+  // console.log("เพลงที่ส่งมา => ", music);
+
+
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -47,6 +55,10 @@ const Homepage = () => {
       <Artis />
       <Catagory />
       {/* <LandingPage /> */}
+      <Grid item style={{ marginTop: 200 }}>
+        {/* <ReactAudioPlayer src={music.MusicURL} autoPlay controls /> */}
+      </Grid>
+      <LandingPage />
       <Footer/>
     </Page>
     

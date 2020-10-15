@@ -33,6 +33,8 @@ import Popper from "@material-ui/core/Popper";
 import MenuList from "@material-ui/core/MenuList";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
+import AudioPlayer from '../../../src/components/AudioPlayer/index'
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -292,7 +294,16 @@ export default function PrimarySearchAppBar(props) {
               <div className={classes.grow} />
 
               <div className={classes.sectionDesktop}>
+
                 <Grid container spacing={3}>
+
+
+
+                  <Grid>
+                  <AudioPlayer audio={""}/>
+                  </Grid>
+
+
                   {CurUser ? (
                     <Fragment>
                       <Grid item style={{ marginRight: 20 }}>
@@ -342,7 +353,10 @@ export default function PrimarySearchAppBar(props) {
                                       id="menu-list-grow"
                                       onKeyDown={handleListKeyDown}
                                     >
-                                      <Link to="profile" style={{color : "#fff"}}>
+                                      <Link
+                                        to="profile"
+                                        style={{ color: "#fff" }}
+                                      >
                                         <MenuItem onClick={handleClose}>
                                           <ListItemIcon>
                                             <Iconuser

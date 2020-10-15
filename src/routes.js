@@ -28,7 +28,7 @@ const routes = [
 
   {
     path: '/',
-    element: <MainLayout />,
+    element: <MainLayout/>,
     children: [
       { path: '/', element: <HomePage /> },
       // { path: 'playlist', element: <Playlist /> },

@@ -1,22 +1,23 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  useReducer,
+  useContext,
+} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
-
 import img from "../../../src/images/download.jpg";
 import "../../../src/css/imgBlur.css";
 import "../../../src/css/imagesHover.css";
 import { Container, Typography } from "@material-ui/core";
-
-//test
-import img1 from "../../../src/images/modern-music-event-poster-template_1361-1292.jpg";
-import img2 from "../../../src/images/music-event-poster-template-with-colorful-shapes_1361-1591.jpg";
-
 import iconPlay from "../../../src/images/play-button.png";
-import { keys } from "@material-ui/core/styles/createBreakpoints";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Player from "../../../src/components/AudioPlayer/index";
+import { GolbalContext } from "../../App";
 import ReactAudioPlayer from "react-audio-player";
 import Footer from "../../layouts/Footer";
 
@@ -42,18 +43,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Profile() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
   const [CurUsername, setCurUsername] = useState("");
   const [CurLastname, setCurLastrname] = useState("");
+  const [UserProfile, setUserProfile] = useState("");
   const [MusicData, setMusicData] = useState([]);
-
-  console.log("test => ", MusicData);
-
-  const clg = () => {
-    console.log("click => button play");
-  };
+  const [audioURL, setAudioURL] = useState("");
+  // const [UserData, setUserData] = useState([]);
+  const { dispatch } = useContext(GolbalContext);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -66,43 +65,37 @@ export default function SignIn() {
           .then((snapshot) => {
             let username = snapshot.val().FirstName || "-";
             let lastname = snapshot.val().LastName || "-";
+            let userProfile = snapshot.val().UserProfile || "-";
             setCurUsername(username);
             setCurLastrname(lastname);
+            setUserProfile(userProfile);
           });
+
+        // firebase
+        //   .database()
+        //   .ref("/users/" + user.uid)
+        //   .on(
+        //     "value",
+        //     (snapshot) => {
+        //       let UserData = [];
+        //       snapshot.forEach((snap) => {
+        //         UserData.push(snap.val());
+        //       });
+        //       setUserData(UserData);
+        //     },
+        //     (errorObject) => {
+        //       console.log("The read failed: " + errorObject.code);
+        //     }
+        //   );
       } else setCurUser(null);
     });
-    // feachMusics();
-    feachUser();
+    feachMymusic();
   }, []);
 
-  function feachMusics() {
-    // var db = firebase.database();
-    // var ref = db.ref("musics/Rock/");
-    // let Data = [];
+  function feachMymusic() {
     firebase
       .database()
-      .ref("musics/Rock/")
-      .on(
-        "value",
-        (snapshot) => {
-          // console.log("res Music =>", snapshot.val());
-          // Data.push(snapshot.val());
-          setMusicData(snapshot.val());
-        },
-        (errorObject) => {
-          console.log("The read failed: " + errorObject.code);
-        }
-      );
-  }
-
-  // var db = firebase.database();
-  // var ref = db.ref("musics/Rock/");
-  // let Data = [];
-
-  function feachUser() {
-    firebase
-      .database()
-      .ref("musics/Rock/")
+      .ref("users/" + firebase.auth().currentUser.uid + "/covers")
       .on(
         "value",
         (snapshot) => {
@@ -117,6 +110,7 @@ export default function SignIn() {
         }
       );
   }
+  console.log(audioURL);
 
   if (CurUser === null) {
     return (
@@ -131,7 +125,7 @@ export default function SignIn() {
       <Fragment>
         <div
           style={{
-            background: `url(${img})`,
+            background: `url(${UserProfile})`,
             backgroundSize: "Cover",
             backgroundRepeat: "no-repeat",
             position: "absolute",
@@ -151,7 +145,7 @@ export default function SignIn() {
               marginBottom: 20,
             }}
           >
-            <Avatar alt="" src={img} className={classes.large} />
+            <Avatar alt="" src={UserProfile} className={classes.large} />
           </div>
 
           <Grid container maxWidth="xs">
@@ -160,12 +154,24 @@ export default function SignIn() {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  fontSize: 40,
+                  fontSize: 35,
                   color: "#fff",
                 }}
               >
                 {CurUsername} {CurLastname}
               </div>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <Typography
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: 17,
+                  color: "#bcbcbc",
+                }}
+              >
+                ผู้ใช้งาน
+              </Typography>
             </Grid>
           </Grid>
 
@@ -177,6 +183,7 @@ export default function SignIn() {
               height: 0.1,
             }}
           ></hr>
+          <div>{/* <Player audio={audioURL}/> */}</div>
           <Typography style={{
               display: "flex",
               justifyContent: "center",
@@ -198,55 +205,26 @@ export default function SignIn() {
           >
             {MusicData.map((res) => {
               return (
-                <div style={{margin:"20px"}}>
-                <Fragment>
+                <div style={{ margin: "20px" }}>
+                  <Fragment>
                     <div className="sigle-team">
-                      <img alt="img1" src={res.ImgMusicURL} />
+                      <img alt="musicimg" src={res.ImgMusicURL} />
                       <div className="team-text">
-                        <img alt="play" onClick={clg} src={iconPlay} />
+                        <img
+                          alt="play"
+                          src={iconPlay}
+
+                          onClick={() =>
+                            dispatch({ type: "SET_URL", payload: res.MusicURL })
+                          }
+                        />
                       </div>
                     </div>
-                </Fragment>
+                  </Fragment>
                 </div>
               );
             })}
           </div>
-          {/* 
-          <Container>
-            <div className="team-area">
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <img alt="play" src={iconPlay} />
-                </div>
-              </div>
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <h2>fuseter</h2>
-                  <p>fff</p>
-                  <p>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                  </p>
-                </div>
-              </div>
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <h2>fuseter</h2>
-                  <p>fff</p>
-                  <p>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Container> */}
-        <Footer/>
         </Page>
       </Fragment>
     );
