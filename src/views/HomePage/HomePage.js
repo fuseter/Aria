@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,Fragment } from "react";
 import { Container, makeStyles, Typography, Grid } from "@material-ui/core";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
@@ -50,16 +50,12 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
-      {/* <LandingPage /> */}
-      <Carousel />
-      <Artis />
+      <Artis  /> 
       <Catagory />
-      {/* <LandingPage /> */}
-      <Grid item style={{ marginTop: 200 }}>
-        {/* <ReactAudioPlayer src={music.MusicURL} autoPlay controls /> */}
-      </Grid>
-      <LandingPage />
       <Footer/>
+      <div style={{marginTop: 200}}>
+        Hello world
+      </div>
     </Page>
     
   );

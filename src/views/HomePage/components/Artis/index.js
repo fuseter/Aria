@@ -1,4 +1,4 @@
-import React, {  useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 
 import SwiperCore, { Pagination } from "swiper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -85,7 +85,8 @@ const tile = [
 export default function Artis() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
-  const [Artis, setArtis] = useState([])
+  const [Artis, setArtis] = useState([]);
+  const [key, setkey] = useState(1)
 
 
 
@@ -94,7 +95,7 @@ export default function Artis() {
   };
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurUser(user);
       } else setCurUser(null);
@@ -128,6 +129,7 @@ export default function Artis() {
         style={{
           padding: 20,
           paddingLeft: 50,
+          marginTop:70
         }}
       >
         ศิลปิน
@@ -165,33 +167,15 @@ export default function Artis() {
         >
           {Artis.map((res) => (
             <SwiperSlide>
-              {/* <GridListTile key={tile.img}> */}
-              {/* <img src={tile.img} alt={tile.title} /> */}
-              {/* <GridListTileBar */}
-              {/* //         title={tile.title}
-            //         subtitle={<span>by: {tile.author}</span>}
-            //         actionIcon={ */}
-              {/* <IconButton aria-label={`info about ${tile.title}`}>
-                         <div className="team-text">
-                           <img alt="play" onClick={clg} src={iconPlay} />
-                         </div>
-                       </IconButton>
-                     }
-                   /> */}
-              <Fragment>
-                <div className="sigle-team">
-                  <img alt="img1" src={res.UserProfile} />
-                  <div className="team-text">
-                    <img alt="play" onClick={clg} src={iconPlay} />
-                  </div>
+              <div className="sigle-team" key={res.FirstName}>
+                <img alt="img1" src={res.UserProfile} />
+                <div className="team-text">
+                  <img alt="play" onClick={clg} src={iconPlay} />
                 </div>
-                <div style={{ margin: 10, color: "grey" }}>
-                  {res.FirstName} {res.LastName}
-         
-             
-                </div>
-              </Fragment>
-              {/* </GridListTile> */}
+              </div>
+              <div style={{ margin: 10, color: "grey" }}>
+                {res.FirstName} {res.LastName}
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

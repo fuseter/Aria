@@ -176,7 +176,7 @@ export default function SignUp() {
           <Grid item lg={12} xs={12}>
             <Link to="/">
               <IconButton aria-label="delete" className={classes.margin}>
-                <ArrowBackIcon fontSize="medium" color="primary" />
+                <ArrowBackIcon fontSize="large" color="primary" />
               </IconButton>
             </Link>
           </Grid>
