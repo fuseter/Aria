@@ -15,15 +15,15 @@ import { Link, us } from "react-router-dom";
 import NextIcon from "@material-ui/icons/ArrowForwardIos";
 import firebase from "../../../../firebase";
 
-import img1 from '../../../../../src/images/1.png'
-import img2 from '../../../../../src/images/2.png'
-import img3 from '../../../../../src/images/3.png'
-import img4 from '../../../../../src/images/4.png'
-import img5 from '../../../../../src/images/5.png'
-import img6 from '../../../../../src/images/6.png'
-import img7 from '../../../../../src/images/7.png'
-import img8 from '../../../../../src/images/8.png'
-import img9 from '../../../../../src/images/9.png'
+import img1 from "../../../../../src/images/1.png";
+import img2 from "../../../../../src/images/2.png";
+import img3 from "../../../../../src/images/3.png";
+import img4 from "../../../../../src/images/4.png";
+import img5 from "../../../../../src/images/5.png";
+import img6 from "../../../../../src/images/6.png";
+import img7 from "../../../../../src/images/7.png";
+import img8 from "../../../../../src/images/8.png";
+import img9 from "../../../../../src/images/9.png";
 
 // import {Link} from "react-router-dom";
 
@@ -262,19 +262,28 @@ export default function Category() {
     <div>
       <Link
         to="listcatagory"
-        state={{ music: ClassicData , type : "เพลงคลาสสิก", img : img1 , dis : "เพลงที่จะทำให้คุณผ่อนคลายได้ทุกเวลา" }}
+        state={{
+          music: ClassicData,
+          type: "เพลงคลาสสิก",
+          img: img1,
+          dis: "เพลงที่จะทำให้คุณผ่อนคลายได้ทุกเวลา",
+        }}
         className={classes.sectionTitle}
       >
-        <Typography className={classes.Title}>
+        <Typography className={classes.Title} style={{ marginTop: 80 }}>
           คลาสสิก
           <NextIcon />
         </Typography>
       </Link>
       <Classic />
-
       <Link
         to="listcatagory"
-        state={{ music: PopData , type : "เพลงป๊อป", img : img2 , dis : "สนุกได้ทุกที่ทุกเวลา"}}
+        state={{
+          music: PopData,
+          type: "เพลงป๊อป",
+          img: img2,
+          dis: "สนุกได้ทุกที่ทุกเวลา",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -286,7 +295,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: JazzData , type : "เพลงแจ๊ส", img : img3 , dis : "เต้นได้ไม่ต้องกลัวเหนื่อย" }}
+        state={{
+          music: JazzData,
+          type: "เพลงแจ๊ส",
+          img: img3,
+          dis: "เต้นได้ไม่ต้องกลัวเหนื่อย",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -298,7 +312,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: FolkData , type : "เพลงลูกทุ่ง", img : img4 , dis : "เพลิดเพลินไปกับเสียงเพลงสบายๆ" }}
+        state={{
+          music: FolkData,
+          type: "เพลงลูกทุ่ง",
+          img: img4,
+          dis: "เพลิดเพลินไปกับเสียงเพลงสบายๆ",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -310,7 +329,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: RBData , type : "เพลงริทึมแอนด์บลูส์", img : img5 , dis : "หลับตาฟังความรักซึ้งๆพร้อมกับจังหวะที่พอดีกัน" }}
+        state={{
+          music: RBData,
+          type: "เพลงริทึมแอนด์บลูส์",
+          img: img5,
+          dis: "หลับตาฟังความรักซึ้งๆพร้อมกับจังหวะที่พอดีกัน",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -322,7 +346,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: RapData , type : "เพลงแร๊พ", img : img6 , dis : "แร๊พสุดมันกับจังหวะสุดเร้าใจ" }}
+        state={{
+          music: RapData,
+          type: "เพลงแร๊พ",
+          img: img6,
+          dis: "แร๊พสุดมันกับจังหวะสุดเร้าใจ",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -334,7 +363,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: HiphopData , type : "เพลงฮิปฮอป", img : img7 , dis : "จังหวะที่จะทำให้คุณโยกตามไปกับเพลง" }}
+        state={{
+          music: HiphopData,
+          type: "เพลงฮิปฮอป",
+          img: img7,
+          dis: "จังหวะที่จะทำให้คุณโยกตามไปกับเพลง",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -346,7 +380,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: RockData , type : "เพลงร๊อก", img : img8 , dis : "ตะโกนไปพร้อมกับเพลงให้สุดเสียง" }}
+        state={{
+          music: RockData,
+          type: "เพลงร๊อก",
+          img: img8,
+          dis: "ตะโกนไปพร้อมกับเพลงให้สุดเสียง",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>
@@ -358,7 +397,12 @@ export default function Category() {
 
       <Link
         to="listcatagory"
-        state={{ music: ElecData , type : "เพลงอิเล็กโทรนิค", img : img9 , dis : "เต้นไปกับพลงไม่มีเนื้อร้องก็ทำให้คุณสนุกได้"  }}
+        state={{
+          music: ElecData,
+          type: "เพลงอิเล็กโทรนิค",
+          img: img9,
+          dis: "เต้นไปกับพลงไม่มีเนื้อร้องก็ทำให้คุณสนุกได้",
+        }}
         className={classes.sectionTitle}
       >
         <Typography className={classes.Title}>

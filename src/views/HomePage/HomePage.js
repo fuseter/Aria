@@ -44,7 +44,7 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
-      <Artis  /> 
+      {/* <Artis  />  */}
       <Catagory />
       
     </Page>
