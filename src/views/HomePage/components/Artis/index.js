@@ -9,14 +9,7 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
 import firebase from "../../../../firebase";
-import img1 from "../../../../images/1.png";
-import img2 from "../../../../images/2.png";
-import img3 from "../../../../images/3.png";
-import img4 from "../../../../images/4.png";
-import img5 from "../../../../images/5.png";
-import img6 from "../../../../images/6.png";
-import img7 from "../../../../images/7.png";
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom'
 
 SwiperCore.use([Pagination]);
 
@@ -41,44 +34,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "25px",
   },
 }));
-
-const tile = [
-  {
-    img: img1,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img2,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img3,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img4,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img5,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img6,
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: img7,
-    title: "Image",
-    author: "author",
-  },
-];
 
 export default function Artis() {
   const classes = useStyles();
@@ -171,14 +126,14 @@ export default function Artis() {
             clickable: true,
           }}
           breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
+            // 150: {
+            //   slidesPerView: 1,
+            //   spaceBetween: 10,
+            // },
+            // 768: {
+            //   slidesPerView: 5,
+            //   spaceBetween: 50,
+            // },
             1024: {
               slidesPerView: 7,
               spaceBetween: 70,
