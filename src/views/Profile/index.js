@@ -245,7 +245,7 @@ export default function SignIn() {
             </div>
           </Container> */}
         </Page>
-        <Footer/>
+        {/* <Footer/> */}
       </Fragment>
     );
   }
