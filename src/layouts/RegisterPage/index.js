@@ -59,6 +59,13 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     marginTop: 70,
   },
+  input: {
+    display: "none",
+  },
+  large: {
+    width: 150,
+    height: 150,
+  },
 }));
 
 export default function SignUp() {
@@ -69,6 +76,13 @@ export default function SignUp() {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [CurrentUser, setCurrentUser] = useState(null);
+  const [image, setImage] = useState(null);
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -146,6 +160,38 @@ export default function SignUp() {
             </Typography>
             <form className={classes.form} onSubmit={register} noValidate>
               <Grid container spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <Avatar
+                    src={image ? URL.createObjectURL(image) : null}
+                    alt={image ? image.name : null}
+                    className={classes.large}
+                  />
+                </Grid>
+                <Grid item xs={12} style={{ textAlign: "center",marginBottom:20 }}>
+                  <input
+                    className={classes.input}
+                    id="contained-button-files"
+                    multiple
+                    type="file"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="contained-button-files">
+                    <Button
+                      // startIcon={<ArrowBackIcon />}
+                      variant="outlined"
+                      component="span"
+                    >
+                      อัพโหลดรูปประจำตัว
+                    </Button>
+                  </label>
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     autoComplete="fname"

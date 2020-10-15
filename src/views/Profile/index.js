@@ -177,7 +177,8 @@ export default function SignIn() {
               height: 0.1,
             }}
           ></hr>
-
+          
+          
           <div
             style={{
               display: "flex",
@@ -191,19 +192,16 @@ export default function SignIn() {
           >
             {MusicData.map((res) => {
               return (
+                <div style={{margin:"20px"}}>
                 <Fragment>
-                  <audio style={{backgroundColor : "#000"}}  controls>
-                    <source  src={res.MusicURL} type="audio/ogg" />
-                  </audio>
-                  {/* <div className="team-area"> */}
                     <div className="sigle-team">
                       <img alt="img1" src={res.ImgMusicURL} />
                       <div className="team-text">
                         <img alt="play" onClick={clg} src={iconPlay} />
                       </div>
                     </div>
-                  {/* </div> */}
                 </Fragment>
+                </div>
               );
             })}
           </div>
