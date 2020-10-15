@@ -342,21 +342,17 @@ export default function PrimarySearchAppBar(props) {
                                       id="menu-list-grow"
                                       onKeyDown={handleListKeyDown}
                                     >
-                                      <MenuItem onClick={handleClose}>
-                                        <ListItemIcon>
-                                          <Iconuser size="18" color="#ffffff" />
-                                        </ListItemIcon>
-                                        โปรไฟล์
-                                      </MenuItem>
-                                      <MenuItem onClick={handleClose}>
-                                        <ListItemIcon>
-                                          <MusicIcon
-                                            size="18"
-                                            color="#ffffff"
-                                          />
-                                        </ListItemIcon>
-                                        เพลงของฉัน
-                                      </MenuItem>
+                                      <Link to="profile" style={{color : "#fff"}}>
+                                        <MenuItem onClick={handleClose}>
+                                          <ListItemIcon>
+                                            <Iconuser
+                                              size="18"
+                                              color="#ffffff"
+                                            />
+                                          </ListItemIcon>
+                                          โปรไฟล์
+                                        </MenuItem>
+                                      </Link>
                                       <MenuItem onClick={logout}>
                                         <ListItemIcon>
                                           <IconLogout
@@ -374,25 +370,9 @@ export default function PrimarySearchAppBar(props) {
                           </Popper>
                         </div>
                       </Grid>
-                      {/* <Grid item>
-                        <Button color="primary" onClick={logout}>
-                          <Typography variant="h5">ออกจากระบบ</Typography>
-                        </Button>
-                      </Grid> */}
                     </Fragment>
                   ) : (
                     <Fragment>
-                      {/* <Grid item>
-                        <Link to="/upload" style={{ color: "#000000" }}>
-                          <Button
-                            variant="contained"
-                            startIcon={<MusicIcon size={20} />}
-                            color="primary"
-                          >
-                            <Typography variant="h5">อัพโหลดเพลง</Typography>
-                          </Button>
-                        </Link>
-                      </Grid> */}
                       <Grid item>
                         <Link to="/auth" style={{ color: "#000000" }}>
                           <Button

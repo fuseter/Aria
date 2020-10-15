@@ -24,7 +24,7 @@ import "../../css/imgBlur.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(10),
+    marginTop: theme.spacing(9),
     // "& label.Mui-focused": {
     //   color: "white",
     // },
@@ -217,7 +217,7 @@ const Upload = () => {
         }}
         className="blur"
       ></div>
-      
+
       <Page className={classes.root} title="UploadMusic">
         <Container maxWidth={false}>
           <Grid alignItems="center" container justify="center" spacing={3}>
@@ -227,40 +227,37 @@ const Upload = () => {
                 variant="h4"
                 color="textPrimary"
                 className={classes.current}
-                style={{marginTop: 40,textAlign: "center"}}
+                style={{ marginTop: 40, textAlign: "center" }}
               >
                 อัพโหลดเพลง Cover ของคุณ
               </Typography>
               <Typography
                 component="h1"
-                
                 color="textPrimary"
                 className={classes.current}
-                style={{marginTop: 14,fontSize: 13.8,color: '#bcbcbc',textAlign: 'center'}}
+                style={{
+                  marginTop: 14,
+                  fontSize: 13.8,
+                  color: "#bcbcbc",
+                  textAlign: "center",
+                }}
               >
                 แบ่งปันเพลงต่างๆในเวอร์ชั่นของคุณให้คนอื่นใน Aria ฟังดูสิ!
+                อัปโหลดเพลงของคุณตอนนี้เลย!
               </Typography>
             </Grid>
           </Grid>
-          {/* <Grid container spacing={3}>
+          <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <Card className={classes.paper}>
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item md={12}>
-                      {image === null ? (
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={Cover}
-                          className={classes.large}
-                        />
-                      ) : (
-                        <Avatar
-                          src={image ? URL.createObjectURL(image) : null}
-                          alt={image ? image.name : null}
-                          className={classes.large}
-                        />
-                      )}
+                      <Avatar
+                        src={image ? URL.createObjectURL(image) : null}
+                        alt={image ? image.name : null}
+                        className={classes.large}
+                      />
                     </Grid>
                     <Grid item md={12}>
                       <input
@@ -282,7 +279,6 @@ const Upload = () => {
                         </Button>
                       </label>
                     </Grid>
-                    somezfzgzg
                     <Grid item md={12}>
                       <input
                         className={classes.input}
@@ -389,7 +385,7 @@ const Upload = () => {
                 </CardContent>
               </Card>
             </Grid>
-          </Grid> */}
+          </Grid>
         </Container>
       </Page>
     </Fragment>

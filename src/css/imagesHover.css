@@ -1,0 +1,88 @@
+.team-area {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+}
+.sigle-team {
+  width: 169px;
+  height: 169px;
+  padding: 24px;
+  background: #fff;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.6s ease-out;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* .sigle-team:hover {
+  transform: translateY(10px);
+} */
+
+.sigle-team:hover:before {
+  opacity: 1;
+}
+
+.sigle-team:hover .team-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+.sigle-team::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #000, transparent);
+  z-index: 2;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.sigle-team img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.sigle-team .team-text {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.5s;
+}
+
+.team-text h2 {
+  margin: 0;
+  letter-spacing: 3px;
+}
+
+.team-text p {
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.team-text img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: -22px;
+  cursor: pointer;
+  margin-left: 100px;
+}
