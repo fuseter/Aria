@@ -1,4 +1,10 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  useReducer,
+  useContext,
+} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,6 +17,7 @@ import { Container, Typography } from "@material-ui/core";
 import iconPlay from "../../../src/images/play-button.png";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
+import { GolbalContext } from "../../App";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +48,9 @@ export default function Profile() {
   const [CurLastname, setCurLastrname] = useState("");
   const [UserProfile, setUserProfile] = useState("");
   const [MusicData, setMusicData] = useState([]);
+  const [audioURL, setAudioURL] = useState("");
   // const [UserData, setUserData] = useState([]);
+  const { dispatch } = useContext(GolbalContext);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -84,7 +93,7 @@ export default function Profile() {
   function feachMymusic() {
     firebase
       .database()
-      .ref("musics/Rock/")
+      .ref("users/" + firebase.auth().currentUser.uid + "/covers")
       .on(
         "value",
         (snapshot) => {
@@ -99,6 +108,7 @@ export default function Profile() {
         }
       );
   }
+  console.log(audioURL);
 
   if (CurUser === null) {
     return (
@@ -171,7 +181,7 @@ export default function Profile() {
               height: 0.1,
             }}
           ></hr>
-
+          <div>{/* <Player audio={audioURL}/> */}</div>
           <div
             style={{
               display: "flex",
@@ -190,7 +200,14 @@ export default function Profile() {
                     <div className="sigle-team">
                       <img alt="musicimg" src={res.ImgMusicURL} />
                       <div className="team-text">
-                        <img alt="play" src={iconPlay} />
+                        <img
+                          alt="play"
+                          src={iconPlay}
+
+                          onClick={() =>
+                            dispatch({ type: "SET_URL", payload: res.MusicURL })
+                          }
+                        />
                       </div>
                     </div>
                   </Fragment>

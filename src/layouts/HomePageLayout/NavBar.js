@@ -303,10 +303,6 @@ export default function PrimarySearchAppBar(props) {
                   <AudioPlayer audio={""}/>
                   </Grid>
 
-{
-  //พวกอัลบัม อยู่ไฟล์ไหน
-  
-}
 
                   {CurUser ? (
                     <Fragment>
