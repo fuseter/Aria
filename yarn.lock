@@ -1446,16 +1446,6 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@iconify/icons-mdi@^1.0.46":
-  version "1.0.145"
-  resolved "https://registry.npmjs.org/@iconify/icons-mdi/-/icons-mdi-1.0.145.tgz"
-  integrity sha512-gBYforrvLnB30U/c2Y96p9hEghjwLQhersu6QkQppsfyrEvTvDRaKqGThK+Clest7/UW4vt5yaRElUCktCYrwQ==
-
-"@iconify/react@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.npmjs.org/@iconify/react/-/react-1.1.3.tgz"
-  integrity sha512-ReZNJyr89AfED6XZIXkhsJiNv2taT3j1cTo1HVPHMsrKOz6gAYdXtD2kDWF6+GVoFUxpmnO0fMcA6yCyTf6Tow==
-
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
   resolved "https://registry.npmjs.org/@jest/console/-/console-24.9.0.tgz"
@@ -2840,6 +2830,13 @@ binary-extensions@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.1.0.tgz"
   integrity sha512-1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ==
+
+bindings@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
+  integrity sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==
+  dependencies:
+    file-uri-to-path "1.0.0"
 
 block-stream@*:
   version "0.0.9"
@@ -5146,8 +5143,6 @@ file-loader@4.3.0:
     loader-utils "^1.2.3"
     schema-utils "^2.5.0"
 
-<<<<<<< HEAD
-=======
 file-uri-to-path@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
@@ -5163,7 +5158,6 @@ filepond@^4.21.1:
   resolved "https://registry.yarnpkg.com/filepond/-/filepond-4.21.1.tgz#b92dfa654732d504864cc770c6f9407429df6626"
   integrity sha512-mVCc4lR63dSP6a0LW9bRlRGIrAgRuuQAWDxdDJzAXQ9JWtUQtyvFlxgaU/02jYrBIBYvnQV+AJ/dgG9HOKfCKw==
 
->>>>>>> abfd78b4f96a712ed589e6fbd8f433210614effe
 filesize@6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/filesize/-/filesize-6.0.1.tgz"
@@ -9810,21 +9804,10 @@ react-feather@^2.0.8:
   dependencies:
     prop-types "^15.7.2"
 
-<<<<<<< HEAD
-react-h5-audio-player@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/react-h5-audio-player/-/react-h5-audio-player-3.4.1.tgz"
-  integrity sha512-wAn+ZvCjw04/TnU2EbaAioSkyUe04RrKDFDXbJCjbjR2lsMKvOKHrsP8X1ufuJjU6lU4Zg9MmWbgCmELdX4xhw==
-  dependencies:
-    "@babel/runtime" "^7.10.2"
-    "@iconify/icons-mdi" "^1.0.46"
-    "@iconify/react" "^1.1.3"
-=======
 react-filepond@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-7.1.0.tgz#e3a83321dcfcd9c55f9f7d97ca1042f6d4412e66"
   integrity sha512-hkxhd1PElzbAaPwY0FElQQPdWD1KzIQAYXSkgeE3W2hdFvyXU4hBuBq5/u04emvOJR/RifrdQGXAX1z07DcOvQ==
->>>>>>> abfd78b4f96a712ed589e6fbd8f433210614effe
 
 react-helmet@^6.1.0:
   version "6.1.0"

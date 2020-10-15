@@ -19,6 +19,7 @@ import RegisterPage from '../src/layouts/RegisterPage'
 
 //Nav
 import Playlist from '../src/views/Playlist'
+import ListCatagory from '../src/views/HomePage/components/ListCatagory'; 
 import Discover from '../src/views/Discover'
 import Profile from '../src/views/Profile'
 
@@ -30,7 +31,8 @@ const routes = [
     element: <MainLayout />,
     children: [
       { path: '/', element: <HomePage /> },
-      { path: 'playlist', element: <Playlist /> },
+      // { path: 'playlist', element: <Playlist /> },
+      { path: 'listcatagory', element: <ListCatagory /> },
       { path: 'Discover', element: <Discover /> },
       {path: 'upload' ,element: <Upload/> },
       {path: 'profile' ,element: <Profile/> },

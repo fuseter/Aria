@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     color: "white",
     letterSpacing: "1.25px",
-    fontSize: "25px",
+    fontSize: "30px",
   },
 }));
 
@@ -89,15 +89,6 @@ export default function Artis() {
   };
   return (
     <div>
-      <div
-        className={classes.sectionTitle}
-        style={{
-          padding: 20,
-          paddingLeft: 50,
-        }}
-      >
-        ศิลปิน
-      </div>
       <div
         style={{
           marginLeft: "12.5%",
