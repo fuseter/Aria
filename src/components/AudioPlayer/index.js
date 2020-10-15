@@ -12,8 +12,6 @@ export default function AudioPlayer() {
   const {state} = useContext(GolbalContext);
   console.log(`Play with URL : ${state.audioURL}`);
   const location = useLocation();
-  // const music = location.state.music;
-  // const classes = useStyles();
 
   return (
     <div>
