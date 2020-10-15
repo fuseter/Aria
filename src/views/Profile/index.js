@@ -18,6 +18,7 @@ import iconPlay from "../../../src/images/play-button.png";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import Skeleton from "@material-ui/lab/Skeleton";
 import ReactAudioPlayer from "react-audio-player";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -245,7 +246,7 @@ export default function SignIn() {
               </div>
             </div>
           </Container> */}
-
+        <Footer/>
         </Page>
       </Fragment>
     );
