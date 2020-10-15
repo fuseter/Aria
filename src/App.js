@@ -26,7 +26,7 @@ const reducer = (state, action) => {
 const App = () => {
   const routing = useRoutes(routes);
   const [state, dispatch] = useReducer(reducer, initialState);
-
+  
   return (
     <GolbalContext.Provider value={{
       state,dispatch

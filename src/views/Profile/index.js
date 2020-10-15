@@ -253,7 +253,6 @@ export default function Profile() {
             </div>
           </div>
         </Page>
-        {/* <Footer/> */}
       </Fragment>
     );
   }

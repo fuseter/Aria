@@ -1,4 +1,4 @@
-import React, { useState, Component,useEffect } from "react";
+import React, { useState, Component, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,6 +10,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import firebase from "../../../../firebase";
 import iconPlay from "../../../../images/play-button.png";
+import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -77,13 +78,16 @@ const song = [
 export default function Category() {
   const classes = useStyles();
   const theme = useTheme();
-  const [MusicData, setMusicData] = useState([]);
+  // const [MusicData, setMusicData] = useState([]);
   const [CurUser, setCurUser] = useState(null);
+  const location = useLocation();
+  const music = location.state.music;
+
+  console.log("music => ", music);
 
   const clg = () => {
     console.log("click => button play");
   };
-
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -91,29 +95,27 @@ export default function Category() {
         setCurUser(user);
       } else setCurUser(null);
     });
-    feachMusic();
+    // feachMusic();
   }, []);
 
-
-
-  function feachMusic() {
-    firebase
-      .database()
-      .ref("musics/Rock/")
-      .on(
-        "value",
-        (snapshot) => {
-          let data = [];
-          snapshot.forEach((snap) => {
-            data.push(snap.val());
-          });
-          setMusicData(data);
-        },
-        (errorObject) => {
-          console.log("The read failed: " + errorObject.code);
-        }
-      );
-  }
+  // function feachMusic() {
+  //   firebase
+  //     .database()
+  //     .ref("musics/Rock/")
+  //     .on(
+  //       "value",
+  //       (snapshot) => {
+  //         let data = [];
+  //         snapshot.forEach((snap) => {
+  //           data.push(snap.val());
+  //         });
+  //         setMusicData(data);
+  //       },
+  //       (errorObject) => {
+  //         console.log("The read failed: " + errorObject.code);
+  //       }
+  //     );
+  // }
 
   return (
     <div>
@@ -163,15 +165,23 @@ export default function Category() {
           <Paper className={classes.paper}>
             <List>
               {/* map List */}
-              {MusicData.map((res) => (
+              {music.map((res) => (
                 <ListItem button>
-                  <img alt="play" onClick={clg} src={iconPlay} style={{
-                      width:"20px",
-                      marginRight:"20px"
-                  }} />
-                  <ListItemText primary={res.MusicName} secondary={res.Artist} />
+                  <img
+                    alt="play"
+                    onClick={clg}
+                    src={iconPlay}
+                    style={{
+                      width: "20px",
+                      marginRight: "20px",
+                    }}
+                  />
+                  <ListItemText
+                    primary={res.MusicName}
+                    secondary={res.Artist}
+                  />
                   {/* <span className={classes.time}>{res.MusicURL}</span> */}
-                </ListItem>     
+                </ListItem>
               ))}
             </List>
           </Paper>
