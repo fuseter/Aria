@@ -51,6 +51,7 @@ const Carousel = () => {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       }}
+      style={{marginTop:"64px"}}
       // navigation
       // pagination={{ el: ".swiper-pagination", dynamicBullets: true }}
     >

@@ -34,7 +34,9 @@
     "filepond": "^4.21.1",
     "filepond-plugin-image-preview": "^4.6.4",
     "firebase": "^7.21.0",
+    "framer-motion": "^2.9.1",
     "history": "^5.0.0",
+    "lottie-web": "^5.7.3",
     "node-sass": "^4.14.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
@@ -44,13 +46,14 @@
     "react-feather": "^2.0.8",
     "react-filepond": "^7.1.0",
     "react-helmet": "^6.1.0",
+    "react-id-swiper": "^4.0.0",
     "react-lottie": "^1.2.3",
     "react-perfect-scrollbar": "^1.5.8",
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^3.4.3",
     "sweetalert": "^2.1.2",
-    "swiper": "^6.2.0"
+    "swiper": "^6.3.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

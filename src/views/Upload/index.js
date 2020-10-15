@@ -26,6 +26,7 @@ import bgupload from "../../../src/images/nblur.png";
 import loadanimation from "../../../src/lottie/music-animation.json";
 import "../../css/imgBlur.css";
 import { AlignCenter } from "react-feather";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Upload = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [CurUser, setCurUser] = useState(null);
   const [Progressimg, setProgressimg] = useState(0);
@@ -188,7 +190,20 @@ const Upload = () => {
         Description: Description,
         Artist: Artist,
         CoverBy: CurUsername,
-      });
+      }).then(
+        swal({
+          title: "อัพโหลดเพลงสำเร็จแล้ว",
+          text: "  ",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+          button: false,
+        }).then(() => {
+          setTimeout(() => {
+            navigate("../profile");
+          }, 500);
+        })
+      );
   }
 
   useEffect(() => {
@@ -336,6 +351,8 @@ const Upload = () => {
                           className={classes.large}
                         />
                       </Grid>
+
+
                       <Grid item xs={12} style={{ textAlign: "center" }}>
                         <input
                           // accept="image/*"
@@ -356,6 +373,8 @@ const Upload = () => {
                           </Button>
                         </label>
                       </Grid>
+
+
                       <Grid
                         item
                         xs={12}
@@ -369,6 +388,9 @@ const Upload = () => {
                             style={{ marginBottom: 30 }}
                           />
                         </div>
+                        <Typography style={{margin:10}}>
+                          {music ? music.name : null}
+                        </Typography>
                         <input
                           className={classes.input}
                           id="contained-button-file"
@@ -387,6 +409,7 @@ const Upload = () => {
                             อัพโหลดเพลง
                           </Button>
                         </label>
+                        
                         <div>รายละเอียดเพลง<hr style={{width:"80%",marginLeft:"auto",marginRight:"auto"}}></hr></div>
                       </Grid>
                     </Grid>
