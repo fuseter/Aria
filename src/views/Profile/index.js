@@ -192,6 +192,7 @@ export default function Profile() {
               marginBottom: -30,
               color: "#fff",
               fontSize: 25}}>เพลงของฉัน</Typography>
+          
           <div
             style={{
               display: "flex",
@@ -213,7 +214,7 @@ export default function Profile() {
                         <img
                           alt="play"
                           src={iconPlay}
-
+                          
                           onClick={() =>
                             dispatch({ type: "SET_URL", payload: res.MusicURL })
                           }
