@@ -9,6 +9,8 @@ import routes from "../src/routes";
 export const GolbalContext = React.createContext(null)
 export const initialState = {
   audioURL: "hello",
+  musicname : "",
+  CoverBy : "",
 };
 
 const reducer = (state, action) => {
@@ -17,6 +19,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         audioURL: action.payload,
+        musicname : action.musicMusicName,
+        CoverBy : action.usercoverby
       };
 
     default:

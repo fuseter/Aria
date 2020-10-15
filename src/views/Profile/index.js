@@ -19,6 +19,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
 import { GolbalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../../src/components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,13 +98,11 @@ export default function Profile() {
   }
   console.log(audioURL);
 
-  if (CurUser === null) {
+  if (MusicData === null) {
     return (
-      <div>
-        <Skeleton variant="text" />
-        <Skeleton variant="circle" width={40} height={40} />
-        <Skeleton variant="rect" width={210} height={118} />
-      </div>
+      <Fragment>
+        <Loading />
+      </Fragment>
     );
   } else {
     return (
@@ -169,15 +168,20 @@ export default function Profile() {
             }}
           ></hr>
           <div>{/* <Player audio={audioURL}/> */}</div>
-          <Typography style={{
+          <Typography
+            style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginTop: 20,
               marginBottom: -30,
               color: "#fff",
-              fontSize: 25}}>เพลงของฉัน</Typography>
-          
+              fontSize: 25,
+            }}
+          >
+            เพลงของฉัน
+          </Typography>
+
           <div
             style={{
               display: "flex",
@@ -200,7 +204,7 @@ export default function Profile() {
                           alt="play"
                           src={iconPlay}
                           onClick={() =>
-                            dispatch({ type: "SET_URL", payload: res.MusicURL })
+                            dispatch({ type: "SET_URL", payload: res.MusicURL  , musicMusicName : res.MusicName, usercoverby : res.CoverBy })
                           }
                         />
                       </div>
