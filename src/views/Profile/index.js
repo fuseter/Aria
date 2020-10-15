@@ -18,6 +18,8 @@ import iconPlay from "../../../src/images/play-button.png";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
 import { GolbalContext } from "../../App";
+import ReactAudioPlayer from "react-audio-player";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -182,6 +184,14 @@ export default function Profile() {
             }}
           ></hr>
           <div>{/* <Player audio={audioURL}/> */}</div>
+          <Typography style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+              marginBottom: -30,
+              color: "#fff",
+              fontSize: 25}}>เพลงของฉัน</Typography>
           <div
             style={{
               display: "flex",

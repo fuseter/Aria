@@ -6,6 +6,7 @@ import Carousel from "./components/carousel";
 import LandingPage from "./components/Landing";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -49,7 +50,9 @@ const Homepage = () => {
         {/* <ReactAudioPlayer src={music.MusicURL} autoPlay controls /> */}
       </Grid>
       <LandingPage />
+      <Footer/>
     </Page>
+    
   );
 };
 
