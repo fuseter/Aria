@@ -40,7 +40,7 @@ export default function Artis() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
   const [Artis, setArtis] = useState([]);
-  const [key, setkey] = useState(1)
+  const [key, setkey] = useState(1);
 
 
 
@@ -49,7 +49,7 @@ export default function Artis() {
   };
 
   useEffect(() => {
-     firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurUser(user);
       } else setCurUser(null);
@@ -83,7 +83,7 @@ export default function Artis() {
         style={{
           padding: 20,
           paddingLeft: 50,
-          marginTop:70
+          marginTop: 70,
         }}
       >
         ศิลปิน

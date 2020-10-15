@@ -53,9 +53,6 @@ const Homepage = () => {
       <Artis  /> 
       <Catagory />
       <Footer/>
-      <div style={{marginTop: 200}}>
-        Hello world
-      </div>
     </Page>
     
   );
