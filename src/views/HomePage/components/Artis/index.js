@@ -151,14 +151,14 @@ export default function Artis() {
             clickable: true,
           }}
           breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 5,
-              spaceBetween: 50,
-            },
+            // 150: {
+            //   slidesPerView: 1,
+            //   spaceBetween: 10,
+            // },
+            // 768: {
+            //   slidesPerView: 5,
+            //   spaceBetween: 50,
+            // },
             1024: {
               slidesPerView: 7,
               spaceBetween: 70,

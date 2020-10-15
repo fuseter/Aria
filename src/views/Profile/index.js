@@ -55,7 +55,7 @@ export default function SignIn() {
   };
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurUser(user);
         firebase
@@ -71,9 +71,9 @@ export default function SignIn() {
       } else setCurUser(null);
     });
     // feachMusics();
-    return () => {
-      unsubscribe();
-    };
+    // return () => {
+    //   unsubscribe();
+    // };
     feachUser();
   }, []);
 
