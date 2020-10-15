@@ -226,6 +226,7 @@ export default function Profile() {
             })}
           </div>
         </Page>
+        <Footer/>
       </Fragment>
     );
   }
