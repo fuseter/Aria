@@ -390,9 +390,6 @@ const Upload = () => {
                         <div>รายละเอียดเพลง<hr style={{width:"80%",marginLeft:"auto",marginRight:"auto"}}></hr></div>
                       </Grid>
                     </Grid>
-
-                    
-
                     <Grid item md={12}>
                       <TextField
                         id="outlined-basic"

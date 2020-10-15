@@ -18,6 +18,7 @@ import iconPlay from "../../../src/images/play-button.png";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
 import { GolbalContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [CurUser, setCurUser] = useState(null);
   const [CurUsername, setCurUsername] = useState("");
   const [CurLastname, setCurLastrname] = useState("");
@@ -68,24 +70,9 @@ export default function Profile() {
             setCurLastrname(lastname);
             setUserProfile(userProfile);
           });
-
-        // firebase
-        //   .database()
-        //   .ref("/users/" + user.uid)
-        //   .on(
-        //     "value",
-        //     (snapshot) => {
-        //       let UserData = [];
-        //       snapshot.forEach((snap) => {
-        //         UserData.push(snap.val());
-        //       });
-        //       setUserData(UserData);
-        //     },
-        //     (errorObject) => {
-        //       console.log("The read failed: " + errorObject.code);
-        //     }
-        //   );
-      } else setCurUser(null);
+      } else {
+        setCurUser(null);
+      }
     });
     feachMymusic();
   }, []);
@@ -203,7 +190,6 @@ export default function Profile() {
                         <img
                           alt="play"
                           src={iconPlay}
-
                           onClick={() =>
                             dispatch({ type: "SET_URL", payload: res.MusicURL })
                           }
