@@ -21,6 +21,8 @@ import { GolbalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../layouts/Footer";
 import GridList from "@material-ui/core/GridList";
+import Loading from "../../../src/components/Loading";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,13 +101,11 @@ export default function Profile() {
   }
   console.log(audioURL);
 
-  if (CurUser === null) {
+  if (MusicData === null) {
     return (
-      <div>
-        <Skeleton variant="text" />
-        <Skeleton variant="circle" width={40} height={40} />
-        <Skeleton variant="rect" width={210} height={118} />
-      </div>
+      <Fragment>
+        <Loading />
+      </Fragment>
     );
   } else {
     return (
@@ -196,65 +196,31 @@ export default function Profile() {
               fontSize: 20,
             }}
           >
-            <div
-              style={{
-                width: "80%",
-                height: "auto",
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "left",
-                overflow: "hidden",
-              }}
-              cols={3}
-            >
-              {MusicData.map((res) => {
-                return (
-                  <div
-                    style={{
-                      marginTop: "30px",
-                      marginBottom: "15px",
-                      marginLeft: "15px",
-                      marginRight: "15px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        height: "auto",
-                        width: "250px",
-                        // justifyContent:"center",
-                        // alignItems:"center",
-                        // textAlign:"center"
-                      }}
-                    >
-                      <Fragment>
-                        <div className="sigle-team">
-                          <img alt="musicimg" src={res.ImgMusicURL} />
-                          <div className="team-text">
-                            <img
-                              alt="play"
-                              src={iconPlay}
-                              onClick={() =>
-                                dispatch({
-                                  type: "SET_URL",
-                                  payload: res.MusicURL,
-                                })
-                              }
-                            />
-                          </div>
-                        </div>
-                        <br></br>
-                        <Typography>{res.MusicName}</Typography>
-                        <Typography>ศิลปิน : {res.Artist}</Typography>
-                      </Fragment>
+            {MusicData.map((res) => {
+              return (
+                <div style={{ margin: "20px" }}>
+             
+                    <div className="sigle-team">
+                      <img alt="musicimg" src={res.ImgMusicURL} />
+                      <div className="team-text">
+                        <img
+                          alt="play"
+                          src={iconPlay}
+                          onClick={() =>
+                            dispatch({ type: "SET_URL", payload: res.MusicURL  , musicMusicName : res.MusicName, usercoverby : res.CoverBy })
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 );
               })}
             </div>
-          </div>
+       
         </Page>
        
       </Fragment>
+      
     );
   }
 }

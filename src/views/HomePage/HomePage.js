@@ -23,12 +23,6 @@ const Homepage = () => {
   const classes = useStyles();
   const [CurrentUser, setCurrentUser] = useState(null);
   const [Email, setEmail] = useState("");
-  // const location = useLocation();
-  // const music = location.state.music;
-
-
-
-  // console.log("เพลงที่ส่งมา => ", music);
 
 
 

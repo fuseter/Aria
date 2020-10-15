@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import NotFoundView from '../src/views/errors/NotFoundView';
 import HomePage from '../src/views/HomePage/HomePage'
 import Upload from '../src/views/Upload'
+import ArtisPage from '../src/components/ArtisLayoutPage'
 // import Testupload from '../src/views/Upload/upload'
 
 
@@ -36,6 +37,7 @@ const routes = [
       { path: 'Discover', element: <Discover /> },
       {path: 'upload' ,element: <Upload/> },
       {path: 'profile' ,element: <Profile/> },
+      {path: 'artis' ,element: <ArtisPage/> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

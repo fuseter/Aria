@@ -117,7 +117,7 @@ export default function Artis() {
                   <img alt="img1" src={res.ImgMusicURL} />
                   <div className="team-text">
                     <img alt="play" onClick={() =>
-                      dispatch({ type: "SET_URL", payload: res.MusicURL })
+                      dispatch({ type: "SET_URL", payload: res.MusicURL, musicMusicName : res.MusicName, usercoverby : res.CoverBy })
                     } src={iconPlay} />
                   </div>
                 </div>
