@@ -10,7 +10,7 @@ import { BorderAll } from "@material-ui/icons";
 // import Player from "./components/Player";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
-import Footer from "../../layouts/Footer";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -52,7 +52,7 @@ const Homepage = () => {
     <Page className={classes.root} title="Aria">
       <Artis  /> 
       <Catagory />
-      <Footer/>
+      
     </Page>
     
   );
