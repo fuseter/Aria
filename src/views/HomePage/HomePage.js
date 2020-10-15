@@ -3,7 +3,11 @@ import { Container, makeStyles, Typography, Grid } from "@material-ui/core";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
 import Carousel from "./components/carousel";
+import Artis from "./components/Artis";
+import Catagory from "./components/Catagory"
 import LandingPage from "./components/Landing";
+import { BorderAll } from "@material-ui/icons";
+// import Player from "./components/Player";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -37,7 +41,10 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
-      <LandingPage />
+      {/* <LandingPage /> */}
+      <Carousel />
+      <Artis />
+      <Catagory />
     </Page>
   );
 };
