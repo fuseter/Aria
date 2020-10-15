@@ -14,9 +14,8 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import ReactAudioPlayer from "react-audio-player";
 import Player from "../../../src/components/AudioPlayer/index";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +44,11 @@ export default function Profile() {
   const [CurUser, setCurUser] = useState(null);
   const [CurUsername, setCurUsername] = useState("");
   const [CurLastname, setCurLastrname] = useState("");
+  const [UserProfile, setUserProfile] = useState("")
   const [MusicData, setMusicData] = useState([]);
+  // const [UserData, setUserData] = useState([]);
+
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -58,36 +61,34 @@ export default function Profile() {
           .then((snapshot) => {
             let username = snapshot.val().FirstName || "-";
             let lastname = snapshot.val().LastName || "-";
+            let userProfile = snapshot.val().UserProfile || "-";
             setCurUsername(username);
             setCurLastrname(lastname);
+            setUserProfile(userProfile)
           });
+
+        // firebase
+        //   .database()
+        //   .ref("/users/" + user.uid)
+        //   .on(
+        //     "value",
+        //     (snapshot) => {
+        //       let UserData = [];
+        //       snapshot.forEach((snap) => {
+        //         UserData.push(snap.val());
+        //       });
+        //       setUserData(UserData);
+        //     },
+        //     (errorObject) => {
+        //       console.log("The read failed: " + errorObject.code);
+        //     }
+        //   );
       } else setCurUser(null);
     });
-    // feachMusics();
-    feachUser();
+    feachMymusic();
   }, []);
 
-  function feachMusics() {
-    // var db = firebase.database();
-    // var ref = db.ref("musics/Rock/");
-    // let Data = [];
-    firebase
-      .database()
-      .ref("musics/Rock/")
-      .on(
-        "value",
-        (snapshot) => {
-          // console.log("res Music =>", snapshot.val());
-          // Data.push(snapshot.val());
-          setMusicData(snapshot.val());
-        },
-        (errorObject) => {
-          console.log("The read failed: " + errorObject.code);
-        }
-      );
-  }
-
-  function feachUser() {
+  function feachMymusic() {
     firebase
       .database()
       .ref("musics/Rock/")
@@ -119,7 +120,7 @@ export default function Profile() {
       <Fragment>
         <div
           style={{
-            background: `url(${img})`,
+            background: `url(${UserProfile})`,
             backgroundSize: "Cover",
             backgroundRepeat: "no-repeat",
             position: "absolute",
@@ -139,7 +140,7 @@ export default function Profile() {
               marginBottom: 20,
             }}
           >
-            <Avatar alt="" src={img} className={classes.large} />
+            <Avatar alt="" src={UserProfile} className={classes.large} />
           </div>
 
           <Grid container maxWidth="xs">
@@ -179,60 +180,27 @@ export default function Profile() {
           >
             {MusicData.map((res, index) => {
               return (
-                <Fragment>
-                  {/* <div className="team-area"> */}
-                  <div className="sigle-team">
-                    <img alt="img1" src={res.ImgMusicURL} />
-                    <div className="team-text">
-                      <Link to="/" state={{music : res}}>
-                        <img
-                          alt="play"
-                          // onClick={(e) => console.log("res =>", res)}
-                          src={iconPlay}
-                        />
-                      </Link>
+                <div style={{ margin: "20px" }}>
+                  <Fragment>
+                    {/* <div className="team-area"> */}
+                    <div className="sigle-team">
+                      <img alt="img1" src={res.ImgMusicURL} />
+                      <div className="team-text">
+                        <Link to="/" state={{ music: res }}>
+                          <img
+                            alt="play"
+                            // onClick={(e) => console.log("res =>", res)}
+                            src={iconPlay}
+                          />
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                  {/* </div> */}
-                </Fragment>
+                    {/* </div> */}
+                  </Fragment>
+                </div>
               );
             })}
           </div>
-          {/* 
-          <Container>
-            <div className="team-area">
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <img alt="play" src={iconPlay} />
-                </div>
-              </div>
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <h2>fuseter</h2>
-                  <p>fff</p>
-                  <p>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                  </p>
-                </div>
-              </div>
-              <div className="sigle-team">
-                <img alt="img1" src={img1} />
-                <div className="team-text">
-                  <h2>fuseter</h2>
-                  <p>fff</p>
-                  <p>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                    <a href="#">icon</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Container> */}
         </Page>
       </Fragment>
     );

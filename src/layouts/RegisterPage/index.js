@@ -3,10 +3,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-
-// import Link from "@material-ui/core/Link"
 import Grid from "@material-ui/core/Grid";
-
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -59,16 +56,32 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     marginTop: 70,
   },
+  input: {
+    display: "none",
+  },
+  large: {
+    width: 150,
+    height: 150,
+  },
 }));
 
 export default function SignUp() {
   const navigate = useNavigate();
   const classes = useStyles();
+  const [progress, setProgress] = useState(0);
+  const [Progressimg, setProgressimg] = useState(0);
   const [Firstname, setFirstname] = useState("");
   const [LastName, setLastName] = useState("");
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
   const [CurrentUser, setCurrentUser] = useState(null);
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -80,8 +93,37 @@ export default function SignUp() {
     });
   }, []);
 
-  function register(event) {
+  function UploadProfile(event) {
     event.preventDefault();
+    const uploadTaskimg = firebase
+      .storage()
+      .ref(`UserProfile/${image.name}`)
+      .put(image);
+    uploadTaskimg.on(
+      "state_changed",
+      (snapshot) => {
+        const progressIMG = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgressimg(progressIMG);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        firebase
+          .storage()
+          .ref("UserProfile")
+          .child(image.name)
+          .getDownloadURL()
+          .then((imgurl) => {
+            setTimeout(register(imgurl), 3000);
+          });
+      }
+    );
+  }
+
+  function register(imgurl) {
     firebase
       .auth()
       .createUserWithEmailAndPassword(Email, Password)
@@ -92,6 +134,7 @@ export default function SignUp() {
           .set({
             FirstName: Firstname,
             LastName: LastName,
+            UserProfile: imgurl,
           })
           .then(() => {
             setCurrentUser(res);
@@ -144,8 +187,40 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               ลงทะเบียน
             </Typography>
-            <form className={classes.form} onSubmit={register} noValidate>
+            <form className={classes.form} onSubmit={UploadProfile} noValidate>
               <Grid container spacing={2}>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    justifyContent: "center",
+                    display: "flex",
+                  }}
+                >
+                  <Avatar
+                    src={image ? URL.createObjectURL(image) : null}
+                    alt={image ? image.name : null}
+                    className={classes.large}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ textAlign: "center", marginBottom: 20 }}
+                >
+                  <input
+                    className={classes.input}
+                    id="contained-button-files"
+                    multiple
+                    type="file"
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="contained-button-files">
+                    <Button variant="outlined" component="span">
+                      อัพโหลดรูปประจำตัว
+                    </Button>
+                  </label>
+                </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     autoComplete="fname"

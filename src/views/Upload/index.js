@@ -11,16 +11,21 @@ import {
   Avatar,
 } from "@material-ui/core";
 import swal from "sweetalert";
+import Lottie from "react-lottie";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import Page from "../../../src/components/Page";
+import AddIcon from "@material-ui/icons/Add";
 import AlbumIcon from "@material-ui/icons/Album";
+import PublishIcon from "@material-ui/icons/Publish";
 import firebase from "../../firebase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Cover from "../../../src/images/cover.png";
 import bgupload from "../../../src/images/nblur.png";
+import loadanimation from "../../../src/lottie/music-animation.json";
 import "../../css/imgBlur.css";
+import { AlignCenter } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -204,6 +209,15 @@ const Upload = () => {
     });
   }, []);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loadanimation,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <Fragment>
       <div
@@ -247,8 +261,8 @@ const Upload = () => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
+          <Grid alignItems="center" container justify="center" spacing={3}>
+            {/* <Grid item xs={12} sm={6}>
               <Card className={classes.paper}>
                 <CardContent>
                   <Grid container spacing={3}>
@@ -301,11 +315,84 @@ const Upload = () => {
                   </Grid>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6} md={6}>
               <Card variant="outlined">
                 <CardContent>
                   <Grid container spacing={3}>
+                    <Grid container spacing={3}>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{
+                          justifyContent: "center",
+                          display: "flex",
+                          marginTop: 15,
+                        }}
+                      >
+                        <Avatar
+                          src={image ? URL.createObjectURL(image) : null}
+                          alt={image ? image.name : null}
+                          className={classes.large}
+                        />
+                      </Grid>
+                      <Grid item xs={12} style={{ textAlign: "center" }}>
+                        <input
+                          // accept="image/*"
+                          className={classes.input}
+                          id="contained-button-files"
+                          multiple
+                          type="file"
+                          onChange={handleChange}
+                        />
+                        <label htmlFor="contained-button-files">
+                          <Button
+                            startIcon={<AddAPhotoIcon />}
+                            variant="contained"
+                            color="primary"
+                            component="span"
+                          >
+                            อัพโหลดปกเพลง
+                          </Button>
+                        </label>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        style={{ textAlign: "center", marginBottom: 10 }}
+                      >
+                        <div>
+                          <Lottie
+                            options={defaultOptions}
+                            height={150}
+                            width={150}
+                            style={{ marginBottom: 30 }}
+                          />
+                        </div>
+                        <input
+                          className={classes.input}
+                          id="contained-button-file"
+                          multiple
+                          type="file"
+                          onChange={handleChangemusic}
+                        />
+                        <label htmlFor="contained-button-file">
+                          <Button
+                            startIcon={<PublishIcon />}
+                            variant="contained"
+                            color="primary"
+                            component="span"
+                            style={{ textAlign: "center", marginBottom: 30 }}
+                          >
+                            อัพโหลดเพลง
+                          </Button>
+                        </label>
+                        <div>รายละเอียดเพลง<hr style={{width:"80%",marginLeft:"auto",marginRight:"auto"}}></hr></div>
+                      </Grid>
+                    </Grid>
+
+                    
+
                     <Grid item md={12}>
                       <TextField
                         id="outlined-basic"
@@ -321,9 +408,7 @@ const Upload = () => {
                         className={classes.textFieldPosition}
                         fullWidth
                       >
-                        <InputLabel id="demo-simple-select-outlined-label">
-                          แนวเพลง
-                        </InputLabel>
+                        <InputLabel>แนวเพลง</InputLabel>
                         <Select
                           native
                           value={MusicGenre}
@@ -375,10 +460,10 @@ const Upload = () => {
                         variant="contained"
                         size="medium"
                         color="primary"
-                        startIcon={<AlbumIcon />}
+                        startIcon={<AddIcon />}
                         onClick={handleUploadmusic}
                       >
-                        อัพโหลดเพลง
+                        ตกลง
                       </Button>
                     </Grid>
                   </Grid>
