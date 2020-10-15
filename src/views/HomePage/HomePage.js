@@ -4,6 +4,7 @@ import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
 import Carousel from "./components/carousel";
 import LandingPage from "./components/Landing";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -38,7 +39,9 @@ const Homepage = () => {
   return (
     <Page className={classes.root} title="Aria">
       <LandingPage />
+      <Footer/>
     </Page>
+    
   );
 };
 
