@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-
 import SwiperCore, { Pagination } from "swiper";
 import { makeStyles } from "@material-ui/core/styles";
 import iconPlay from "../../../../images/play-button.png";
@@ -9,9 +8,7 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
-
 import firebase from "../../../../firebase";
-
 import img1 from "../../../../images/1.png";
 import img2 from "../../../../images/2.png";
 import img3 from "../../../../images/3.png";
@@ -19,6 +16,7 @@ import img4 from "../../../../images/4.png";
 import img5 from "../../../../images/5.png";
 import img6 from "../../../../images/6.png";
 import img7 from "../../../../images/7.png";
+import { Link } from "react-router-dom";
 
 SwiperCore.use([Pagination]);
 
@@ -86,16 +84,18 @@ export default function Artis() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
   const [Artis, setArtis] = useState([]);
-  const [key, setkey] = useState(1)
+  const [key, setkey] = useState(1);
 
+  const [test, settest] = useState([])
 
+  console.log("test => " , test)
 
   const clg = () => {
     console.log("click => button play");
   };
 
   useEffect(() => {
-     firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setCurUser(user);
       } else setCurUser(null);
@@ -120,7 +120,27 @@ export default function Artis() {
           console.log("The read failed: " + errorObject.code);
         }
       );
+
   }
+
+  // function covers() {
+  //   firebase
+  //     .database()
+  //     .ref("/users/" + )
+  //     .on(
+  //       "value",
+  //       (snapshot) => {
+  //         let data = [];
+  //         snapshot.forEach((snap) => {
+  //           data.push(snap.val());
+  //         });
+  //         settest(data);
+  //       },
+  //       (errorObject) => {
+  //         console.log("The read failed: " + errorObject.code);
+  //       }
+  //     );
+  // }
 
   return (
     <div>
@@ -129,7 +149,7 @@ export default function Artis() {
         style={{
           padding: 20,
           paddingLeft: 50,
-          marginTop:70
+          marginTop: 70,
         }}
       >
         ศิลปิน
@@ -167,12 +187,14 @@ export default function Artis() {
         >
           {Artis.map((res) => (
             <SwiperSlide>
-              <div className="sigle-team" key={res.FirstName}>
-                <img alt="img1" src={res.UserProfile} />
-                <div className="team-text">
-                  <img alt="play" onClick={clg} src={iconPlay} />
+              <Link to="artis" state={{ artis: res }}>
+                <div className="sigle-team" key={res.FirstName}>
+                  <img alt="img1" src={res.UserProfile} />
+                  <div className="team-text">
+                    <img alt="play" src={iconPlay} />
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div style={{ margin: 10, color: "grey" }}>
                 {res.FirstName} {res.LastName}
               </div>
