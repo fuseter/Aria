@@ -8,6 +8,7 @@ import Catagory from "./components/Catagory"
 import LandingPage from "./components/Landing";
 import { BorderAll } from "@material-ui/icons";
 // import Player from "./components/Player";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -45,7 +46,10 @@ const Homepage = () => {
       <Carousel />
       <Artis />
       <Catagory />
+      {/* <LandingPage /> */}
+      <Footer/>
     </Page>
+    
   );
 };
 

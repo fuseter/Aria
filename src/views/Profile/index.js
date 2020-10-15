@@ -18,6 +18,7 @@ import iconPlay from "../../../src/images/play-button.png";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import Skeleton from "@material-ui/lab/Skeleton";
 import ReactAudioPlayer from "react-audio-player";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -176,8 +177,14 @@ export default function SignIn() {
               height: 0.1,
             }}
           ></hr>
-          
-          
+          <Typography style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 20,
+              marginBottom: -30,
+              color: "#fff",
+              fontSize: 25}}>เพลงของฉัน</Typography>
           <div
             style={{
               display: "flex",
@@ -239,7 +246,7 @@ export default function SignIn() {
               </div>
             </div>
           </Container> */}
-
+        <Footer/>
         </Page>
       </Fragment>
     );
