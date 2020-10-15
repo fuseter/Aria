@@ -84,36 +84,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
+
+
+const TopBar = ({
+  className,
+  onMobileNavOpen,
+  CurrentUser,
+  Logout,
+  ...rest
+}) => {
   const classes = useStyles();
-  const [CurrentUser, setCurrentUser] = useState(null);
+  // const [CurrentUser, setCurrentUser] = useState(null);
   const [Email, setEmail] = useState("");
 
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      setCurrentUser(user);
-    } else {
-      setCurrentUser("");
-    }
-  });
+  // firebase.auth().onAuthStateChanged((user) => {
+  //   if (user) {
+  //     setCurrentUser(user);
+  //   } else {
+  //     setCurrentUser("");
+  //   }
+  // });
 
-  var user = firebase.auth().currentUser;
-  useEffect(() => {
-    if (user !== null) {
-      setEmail(user.email);
-    }
-  }, [user]);
-
-  function Logout(event) {
-    event.preventDefault();
-    firebase
-      .auth()
-      .signOut()
-      .then((res) => {
-        window.location.reload(false);
-        setCurrentUser(null);
-      });
-  }
+  // var user = firebase.auth().currentUser;
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     setEmail(user.email);
+  //   }
+  // }, [user]);
 
   return (
     <AppBar
@@ -123,7 +120,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
     >
       <Toolbar>
         <Grid item>
-          <Link href="/" style={{textDecoration: 'none'}}>
+          <Link href="/" style={{ textDecoration: "none" }}>
             <IconButton
               edge="start"
               className={classes.menuButton}
@@ -163,7 +160,6 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
                     อัพโหลดเพลง
                   </Button>
                 </Link>
-
                 <Button
                   className={classes.btnupload}
                   onClick={Logout}
@@ -184,7 +180,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
                     เข้าสู่ระบบ
                   </Button>
                 </Link>
-                
+
                 <Link
                   style={{ textDecoration: "none" }}
                   href="auth/register"
