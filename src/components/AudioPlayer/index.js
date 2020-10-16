@@ -18,19 +18,23 @@ export default function AudioPlayer() {
     <div>
       <Grid container>
         <Grid item>
-          <div style={{ marginTop: 17, marginRight: 18 }}>
+          <div style={{ marginTop: 19, marginRight: 18 }}>
             {state.musicname}
             {state.musicname ? <Fragment> - </Fragment> : <Fragment></Fragment>}
             {state.CoverBy}
           </div>
         </Grid>
         <Grid item>
-          <ReactAudioPlayer
-            style={{ height: 40, marginRight: 100, marginTop: 7 }}
-            src={state.audioURL}
-            autoPlay
-            controls
-          />
+          {state.musicname ? (
+            <ReactAudioPlayer
+              style={{ height: 40, marginRight: 100, marginTop: 7 }}
+              src={state.audioURL}
+              autoPlay
+              controls
+            />
+          ) : (
+            <Fragment></Fragment>
+          )}
         </Grid>
       </Grid>
     </div>

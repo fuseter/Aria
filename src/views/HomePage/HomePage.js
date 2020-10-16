@@ -42,9 +42,9 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
-      <Artis />
+      {/* <Artis  />  */}
       <Catagory />
-      <Footer />
+      {/* <Footer /> */}
     </Page>
   );
 };
