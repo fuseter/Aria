@@ -27,6 +27,7 @@ import loadanimation from "../../../src/lottie/music-animation.json";
 import "../../css/imgBlur.css";
 import { AlignCenter } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -493,6 +494,7 @@ const Upload = () => {
           </Grid>
         </Container>
       </Page>
+      <Footer/>
     </Fragment>
   );
 };

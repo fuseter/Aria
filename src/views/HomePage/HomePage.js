@@ -1,16 +1,16 @@
-import React, { useEffect, useState ,Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Container, makeStyles, Typography, Grid } from "@material-ui/core";
 import Page from "../../../src/components/Page";
 import firebase from "../../firebase";
 import Carousel from "./components/carousel";
 import Artis from "./components/Artis";
-import Catagory from "./components/Catagory"
+import Catagory from "./components/Catagory";
 import LandingPage from "./components/Landing";
 import { BorderAll } from "@material-ui/icons";
 // import Player from "./components/Player";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
-
+import Footer from "../../layouts/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -23,8 +23,6 @@ const Homepage = () => {
   const classes = useStyles();
   const [CurrentUser, setCurrentUser] = useState(null);
   const [Email, setEmail] = useState("");
-
-
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -44,11 +42,10 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
-      <Artis  /> 
+      <Artis />
       <Catagory />
-      
+      <Footer />
     </Page>
-    
   );
 };
 

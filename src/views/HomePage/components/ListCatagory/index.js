@@ -13,6 +13,7 @@ import iconPlay from "../../../../images/play-button.png";
 import { useLocation } from "react-router-dom";
 import "../../../../../src/css/imgBlur.css";
 import { GolbalContext } from "../../../../App";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -174,7 +175,10 @@ export default function Category() {
             </List>
           </Paper>
         </Grid>
+       
       </div>
+   
     </div>
+    
   );
 }
