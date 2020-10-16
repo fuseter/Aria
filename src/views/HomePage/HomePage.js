@@ -10,6 +10,9 @@ import { BorderAll } from "@material-ui/icons";
 // import Player from "./components/Player";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
+import Slider from "../../../src/views/HomePage/components/Slide";
+import "../../../src/css/imgBlur.css";
+import imgg from "../../../src/images/7.png"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -50,8 +53,14 @@ const Homepage = () => {
 
   return (
     <Page className={classes.root} title="Aria">
+      <div style={{
+        height: "170px",
+        background: `url(${imgg})`
+      }} className="blur"></div>
+      <Slider />
       <Artis  /> 
       <Catagory />
+      
       
     </Page>
     

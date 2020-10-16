@@ -12,6 +12,7 @@ import firebase from "../../../../firebase";
 import iconPlay from "../../../../images/play-button.png";
 import { useLocation } from "react-router-dom";
 import "../../../../../src/css/imgBlur.css";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
