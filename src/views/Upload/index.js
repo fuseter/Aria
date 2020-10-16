@@ -27,6 +27,8 @@ import loadanimation from "../../../src/lottie/music-animation.json";
 import "../../css/imgBlur.css";
 import { AlignCenter } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../layouts/Footer";
+import MusicNoteIcon from "@material-ui/icons/MusicNote";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -190,7 +192,8 @@ const Upload = () => {
         Description: Description,
         Artist: Artist,
         CoverBy: CurUsername,
-      }).then(
+      })
+      .then(
         swal({
           title: "อัพโหลดเพลงสำเร็จแล้ว",
           text: "  ",
@@ -205,7 +208,6 @@ const Upload = () => {
         })
       );
   }
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -349,9 +351,10 @@ const Upload = () => {
                           src={image ? URL.createObjectURL(image) : null}
                           alt={image ? image.name : null}
                           className={classes.large}
-                        />
+                        >
+                            <MusicNoteIcon style={{fontSize: 80}}/>
+                        </Avatar>
                       </Grid>
-
 
                       <Grid item xs={12} style={{ textAlign: "center" }}>
                         <input
@@ -374,7 +377,6 @@ const Upload = () => {
                         </label>
                       </Grid>
 
-
                       <Grid
                         item
                         xs={12}
@@ -388,7 +390,7 @@ const Upload = () => {
                             style={{ marginBottom: 30 }}
                           />
                         </div>
-                        <Typography style={{margin:10}}>
+                        <Typography style={{ margin: 10 }}>
                           {music ? music.name : null}
                         </Typography>
                         <input
@@ -409,8 +411,10 @@ const Upload = () => {
                             อัพโหลดเพลง
                           </Button>
                         </label>
-                        
-                        <div>รายละเอียดเพลง<hr style={{width:"80%",marginLeft:"auto",marginRight:"auto"}}></hr></div>
+
+                        <div style={{ marginTop: 10, fontSize: 20 }}>
+                          รายละเอียดเพลง
+                        </div>
                       </Grid>
                     </Grid>
                     <Grid item md={12}>
@@ -493,6 +497,7 @@ const Upload = () => {
           </Grid>
         </Container>
       </Page>
+      <Footer />
     </Fragment>
   );
 };

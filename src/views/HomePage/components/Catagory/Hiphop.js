@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useContext } from "react";
 
 import SwiperCore, { Pagination } from "swiper";
 
@@ -11,7 +11,7 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
-
+import { GolbalContext } from "../../../../App";
 import firebase from "../../../../firebase";
 
 SwiperCore.use([Pagination]);
@@ -43,6 +43,7 @@ export default function Artis() {
   const classes = useStyles();
   const [CurUser, setCurUser] = useState(null);
   const [MusicData, setMusicData] = useState([]);
+  const { dispatch } = useContext(GolbalContext);
 
   const clg = () => {
     console.log("click => button play");
@@ -115,7 +116,9 @@ export default function Artis() {
                 <div className="sigle-team">
                   <img alt="img1" src={res.ImgMusicURL} />
                   <div className="team-text">
-                    <img alt="play" onClick={clg} src={iconPlay} />
+                    <img alt="play" onClick={() =>
+                      dispatch({ type: "SET_URL", payload: res.MusicURL , musicMusicName : res.MusicName, usercoverby : res.CoverBy})
+                    } src={iconPlay} />
                   </div>
                 </div>
                 <div style={{ margin: 10, color: "grey" }}>

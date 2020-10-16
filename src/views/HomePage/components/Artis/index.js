@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-
 import SwiperCore, { Pagination } from "swiper";
 import { makeStyles } from "@material-ui/core/styles";
 import iconPlay from "../../../../images/play-button.png";
@@ -9,8 +8,8 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/scrollbar/scrollbar.scss";
-
 import firebase from "../../../../firebase";
+import {Link} from 'react-router-dom'
 
 SwiperCore.use([Pagination]);
 
@@ -42,7 +41,9 @@ export default function Artis() {
   const [Artis, setArtis] = useState([]);
   const [key, setkey] = useState(1);
 
+  const [test, settest] = useState([])
 
+  console.log("test => " , test)
 
   const clg = () => {
     console.log("click => button play");
@@ -74,7 +75,27 @@ export default function Artis() {
           console.log("The read failed: " + errorObject.code);
         }
       );
+
   }
+
+  // function covers() {
+  //   firebase
+  //     .database()
+  //     .ref("/users/" + )
+  //     .on(
+  //       "value",
+  //       (snapshot) => {
+  //         let data = [];
+  //         snapshot.forEach((snap) => {
+  //           data.push(snap.val());
+  //         });
+  //         settest(data);
+  //       },
+  //       (errorObject) => {
+  //         console.log("The read failed: " + errorObject.code);
+  //       }
+  //     );
+  // }
 
   return (
     <div>
@@ -121,12 +142,14 @@ export default function Artis() {
         >
           {Artis.map((res) => (
             <SwiperSlide>
-              <div className="sigle-team" key={res.FirstName}>
-                <img alt="img1" src={res.UserProfile} />
-                <div className="team-text">
-                  <img alt="play" onClick={clg} src={iconPlay} />
+              <Link to="artis" state={{ artis: res }}>
+                <div className="sigle-team" key={res.FirstName}>
+                  <img alt="img1" src={res.UserProfile} />
+                  <div className="team-text">
+                    <img alt="play" src={iconPlay} />
+                  </div>
                 </div>
-              </div>
+              </Link>
               <div style={{ margin: 10, color: "grey" }}>
                 {res.FirstName} {res.LastName}
               </div>

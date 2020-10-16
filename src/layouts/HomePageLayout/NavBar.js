@@ -278,7 +278,7 @@ export default function PrimarySearchAppBar(props) {
                   <img alt="Logo" src={Logo} className={classes.logo} />
                 </IconButton>
               </Link>
-              <div className={classes.search}>
+              {/* <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
@@ -290,7 +290,7 @@ export default function PrimarySearchAppBar(props) {
                   }}
                   inputProps={{ "aria-label": "search" }}
                 />
-              </div>
+              </div> */}
               <div className={classes.grow} />
 
               <div className={classes.sectionDesktop}>

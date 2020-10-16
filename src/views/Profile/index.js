@@ -13,12 +13,16 @@ import firebase from "../../firebase";
 import img from "../../../src/images/download.jpg";
 import "../../../src/css/imgBlur.css";
 import "../../../src/css/imagesHover.css";
-import { Container, Typography } from "@material-ui/core";
+import { Card, Container, Typography } from "@material-ui/core";
 import iconPlay from "../../../src/images/play-button.png";
 import Skeleton from "@material-ui/lab/Skeleton";
 import Player from "../../../src/components/AudioPlayer/index";
 import { GolbalContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../layouts/Footer";
+import GridList from "@material-ui/core/GridList";
+import Loading from "../../../src/components/Loading";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +58,9 @@ export default function Profile() {
   // const [UserData, setUserData] = useState([]);
   const { dispatch } = useContext(GolbalContext);
 
+  const [Done, setDone] = useState(undefined)
+  const [Doneprofile, setDoneprofile] = useState(undefined)
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -69,6 +76,7 @@ export default function Profile() {
             setCurUsername(username);
             setCurLastrname(lastname);
             setUserProfile(userProfile);
+            setDoneprofile(true)
           });
       } else {
         setCurUser(null);
@@ -89,6 +97,7 @@ export default function Profile() {
             data.push(snap.val());
           });
           setMusicData(data);
+          setDone(true)
         },
         (errorObject) => {
           console.log("The read failed: " + errorObject.code);
@@ -97,13 +106,11 @@ export default function Profile() {
   }
   console.log(audioURL);
 
-  if (CurUser === null) {
+  if (Done === undefined || Done === null || Doneprofile === undefined || Doneprofile === null  ) {
     return (
-      <div>
-        <Skeleton variant="text" />
-        <Skeleton variant="circle" width={40} height={40} />
-        <Skeleton variant="rect" width={210} height={118} />
-      </div>
+      <Fragment>
+        <Loading />
+      </Fragment>
     );
   } else {
     return (
@@ -169,15 +176,20 @@ export default function Profile() {
             }}
           ></hr>
           <div>{/* <Player audio={audioURL}/> */}</div>
-          <Typography style={{
+          <Typography
+            style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               marginTop: 20,
               marginBottom: -30,
               color: "#fff",
-              fontSize: 25}}>เพลงของฉัน</Typography>
-          
+              fontSize: 25,
+            }}
+          >
+            เพลงของฉัน
+          </Typography>
+
           <div
             style={{
               display: "flex",
@@ -192,7 +204,7 @@ export default function Profile() {
             {MusicData.map((res) => {
               return (
                 <div style={{ margin: "20px" }}>
-                  <Fragment>
+             
                     <div className="sigle-team">
                       <img alt="musicimg" src={res.ImgMusicURL} />
                       <div className="team-text">
@@ -200,18 +212,20 @@ export default function Profile() {
                           alt="play"
                           src={iconPlay}
                           onClick={() =>
-                            dispatch({ type: "SET_URL", payload: res.MusicURL })
+                            dispatch({ type: "SET_URL", payload: res.MusicURL  , musicMusicName : res.MusicName, usercoverby : res.CoverBy })
                           }
                         />
                       </div>
                     </div>
-                  </Fragment>
-                </div>
-              );
-            })}
-          </div>
+                  </div>
+                );
+              })}
+            </div>
+       
         </Page>
+       
       </Fragment>
+      
     );
   }
 }
