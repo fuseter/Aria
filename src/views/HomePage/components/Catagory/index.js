@@ -25,6 +25,8 @@ import img7 from "../../../../../src/images/7.png";
 import img8 from "../../../../../src/images/8.png";
 import img9 from "../../../../../src/images/9.png";
 
+import Loading from "../../../../../src/components/Loading";
+
 // import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +62,8 @@ export default function Category() {
   const [HiphopData, setHiphopData] = useState([]);
   const [RockData, setRockData] = useState([]);
   const [ElecData, setElecData] = useState([]);
+
+  const [Done, setDone] = useState(undefined);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -251,11 +255,16 @@ export default function Category() {
             data.push(snap.val());
           });
           setElecData(data);
+          setDone(true);
         },
         (errorObject) => {
           console.log("The read failed: " + errorObject.code);
         }
       );
+  }
+
+  if (Done === undefined || Done === null) {
+    return <Loading/>
   }
 
   return (

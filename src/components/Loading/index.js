@@ -1,6 +1,6 @@
 import React from 'react'
 import Lottie from "react-lottie";
-import loading from "../../../src/lottie/29208-loading.json";
+import loading from "../../../src/lottie/14467-music.json";
 
 export default function Loading() {
     const defaultOptions = {
@@ -13,11 +13,11 @@ export default function Loading() {
       };
     
     return (
-      <div>
+      <div style={{marginTop : '13rem'}}>
         <Lottie 
           options={defaultOptions}
-          height={400}
-          width={400}
+          height={300}
+          width={300}
         />
       </div>
     );

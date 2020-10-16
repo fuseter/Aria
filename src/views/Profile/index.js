@@ -58,6 +58,9 @@ export default function Profile() {
   // const [UserData, setUserData] = useState([]);
   const { dispatch } = useContext(GolbalContext);
 
+  const [Done, setDone] = useState(undefined)
+  const [Doneprofile, setDoneprofile] = useState(undefined)
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -73,6 +76,7 @@ export default function Profile() {
             setCurUsername(username);
             setCurLastrname(lastname);
             setUserProfile(userProfile);
+            setDoneprofile(true)
           });
       } else {
         setCurUser(null);
@@ -93,6 +97,7 @@ export default function Profile() {
             data.push(snap.val());
           });
           setMusicData(data);
+          setDone(true)
         },
         (errorObject) => {
           console.log("The read failed: " + errorObject.code);
@@ -101,7 +106,7 @@ export default function Profile() {
   }
   console.log(audioURL);
 
-  if (MusicData === null) {
+  if (Done === undefined || Done === null || Doneprofile === undefined || Doneprofile === null  ) {
     return (
       <Fragment>
         <Loading />

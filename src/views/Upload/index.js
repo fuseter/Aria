@@ -205,7 +205,6 @@ const Upload = () => {
         })
       );
   }
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
