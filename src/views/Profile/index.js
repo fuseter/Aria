@@ -23,7 +23,6 @@ import Footer from "../../layouts/Footer";
 import GridList from "@material-ui/core/GridList";
 import Loading from "../../../src/components/Loading";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(8),
@@ -58,8 +57,8 @@ export default function Profile() {
   // const [UserData, setUserData] = useState([]);
   const { dispatch } = useContext(GolbalContext);
 
-  const [Done, setDone] = useState(undefined)
-  const [Doneprofile, setDoneprofile] = useState(undefined)
+  const [Done, setDone] = useState(undefined);
+  const [Doneprofile, setDoneprofile] = useState(undefined);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -76,7 +75,7 @@ export default function Profile() {
             setCurUsername(username);
             setCurLastrname(lastname);
             setUserProfile(userProfile);
-            setDoneprofile(true)
+            setDoneprofile(true);
           });
       } else {
         setCurUser(null);
@@ -97,7 +96,7 @@ export default function Profile() {
             data.push(snap.val());
           });
           setMusicData(data);
-          setDone(true)
+          setDone(true);
         },
         (errorObject) => {
           console.log("The read failed: " + errorObject.code);
@@ -106,7 +105,12 @@ export default function Profile() {
   }
   console.log(audioURL);
 
-  if (Done === undefined || Done === null || Doneprofile === undefined || Doneprofile === null  ) {
+  if (
+    Done === undefined ||
+    Done === null ||
+    Doneprofile === undefined ||
+    Doneprofile === null
+  ) {
     return (
       <Fragment>
         <Loading />
@@ -204,28 +208,32 @@ export default function Profile() {
             {MusicData.map((res) => {
               return (
                 <div style={{ margin: "20px" }}>
-             
-                    <div className="sigle-team">
-                      <img alt="musicimg" src={res.ImgMusicURL} />
-                      <div className="team-text">
-                        <img
-                          alt="play"
-                          src={iconPlay}
-                          onClick={() =>
-                            dispatch({ type: "SET_URL", payload: res.MusicURL  , musicMusicName : res.MusicName, usercoverby : res.CoverBy })
-                          }
-                        />
-                      </div>
+                  <div className="sigle-team">
+                    <img alt="musicimg" src={res.ImgMusicURL} />
+                    <div className="team-text">
+                      <img
+                        alt="play"
+                        src={iconPlay}
+                        onClick={() =>
+                          dispatch({
+                            type: "SET_URL",
+                            payload: res.MusicURL,
+                            musicMusicName: res.MusicName,
+                            usercoverby: res.CoverBy,
+                          })
+                        }
+                      />
                     </div>
                   </div>
-                );
-              })}
-            </div>
-       
+                  <div style={{ margin: 10, color: "grey" }}>
+                  {res.MusicName} - {res.Artist}
+                </div>
+                </div>
+              );
+            })}
+          </div>
         </Page>
-       
       </Fragment>
-      
     );
   }
 }
